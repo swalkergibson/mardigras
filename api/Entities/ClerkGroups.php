@@ -1,4 +1,5 @@
 <?php
+Namespace Entities;
 
 
 
@@ -28,6 +29,10 @@ class ClerkGroups
      */
     private $title;
 
+    /**
+     * @OneToMany(targetEntity="Clerks", mappedBy="ClerkGroup")
+    */
+    protected  $myClerks;
 
     /**
      * Get id
@@ -61,4 +66,28 @@ class ClerkGroups
     {
         return $this->title;
     }
+
+    /**
+     * Set myClerks
+     *
+     * @param Entities\Clerks $myClerks
+     * @return Clerks
+     */
+    public function setmyClerks(ClerkGroups $myClerks)
+    {
+        $this->myClerks = $myClerks;
+    
+        return $this;
+    }
+
+    /**
+     * Get myClerks
+     *
+     * @return Entities\Clerks 
+     */
+    public function getmyClerks()
+    {
+        return $this->myClerks;
+    }
+
 }

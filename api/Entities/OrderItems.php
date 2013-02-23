@@ -1,4 +1,5 @@
 <?php
+Namespace Entities;
 
 
 
@@ -52,7 +53,6 @@ class OrderItems
     /**
      * @var \Orders
      *
-     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Orders")
      * @JoinColumns({
@@ -64,7 +64,6 @@ class OrderItems
     /**
      * @var \Inventory
      *
-     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Inventory")
      * @JoinColumns({

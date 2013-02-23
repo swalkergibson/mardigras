@@ -1,4 +1,5 @@
 <?php
+Namespace Entities;
 
 
 
@@ -31,7 +32,6 @@ class Groups
     /**
      * @var \Customers
      *
-     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Customers")
      * @JoinColumns({

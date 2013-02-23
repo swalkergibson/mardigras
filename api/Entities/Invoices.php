@@ -1,4 +1,5 @@
 <?php
+Namespace Entities;
 
 
 
@@ -73,7 +74,6 @@ class Invoices
     /**
      * @var \Clerks
      *
-     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Clerks")
      * @JoinColumns({
@@ -85,7 +85,6 @@ class Invoices
     /**
      * @var \InvoiceStatus
      *
-     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="InvoiceStatus")
      * @JoinColumns({
@@ -107,7 +106,6 @@ class Invoices
     /**
      * @var \Customers
      *
-     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Customers")
      * @JoinColumns({
