@@ -1,5 +1,6 @@
 # Disallow directory listing
-Options -Indexes
+# Comment out if in dev
+#Options -Indexes
 
 # Deny certain file types
 <FilesMatch "\.(ini|log|sh|inc|bak|md)$">
