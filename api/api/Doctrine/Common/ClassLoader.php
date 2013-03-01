@@ -155,7 +155,6 @@ class ClassLoader
      */
     public function loadClass($className)
     {
-        if ($this->namespace == 'Entities') echo "$className\r\n";
         if ($this->namespace !== null && strpos($className, $this->namespace.$this->namespaceSeparator) !== 0) {
             return false;
         }

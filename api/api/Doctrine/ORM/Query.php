@@ -231,7 +231,7 @@ final class Query extends AbstractQuery
         $parser = new Parser($this);
 
         $this->_parserResult = $parser->parse();
-echo "b";
+
         $queryCache->save($hash, $this->_parserResult, $this->_queryCacheTTL);
 
         return $this->_parserResult;

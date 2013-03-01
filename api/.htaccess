@@ -1,5 +1,8 @@
-Options +FollowSymLinks
-RewriteEngine On
+# Disallow directory listing
+Options -Indexes
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.php [QSA,L]
+# Deny certain file types
+<FilesMatch "\.(ini|log|sh|inc|bak|md)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
