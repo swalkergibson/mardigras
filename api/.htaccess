@@ -3,7 +3,7 @@
 #Options -Indexes
 
 # Deny certain file types
-<FilesMatch "\.(ini|log|sh|inc|bak|md)$">
+<FilesMatch "\.(ini|log|sh|inc|bak|md|jar)$">
 Order Allow,Deny
 Deny from all
 </FilesMatch>

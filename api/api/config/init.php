@@ -1,15 +1,7 @@
 <?php
 require_once 'Doctrine/Common/ClassLoader.php';
 
-// Setup Autoloader (1)
-// Define application environment
-define('APPLICATION_ENV', "development");
-/*
-defined('APPLICATION_ENV')
-    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
-*/
-
-// Autoloader (1)
+// Autoloader setup: Register common namespaces (Route specific namespaces registered in specific route files)
 $classLoader = new \Doctrine\Common\ClassLoader('Doctrine');
 $classLoader->register();
 
@@ -20,6 +12,9 @@ $classLoader = new \Doctrine\Common\ClassLoader('Proxies');
 $classLoader->register();
 
 $classLoader = new \Doctrine\Common\ClassLoader('Slim');
+$classLoader->register();
+
+$classLoader = new \Doctrine\Common\ClassLoader('Slim\Extras\Middleware');
 $classLoader->register();
 
 $classLoader = new \Doctrine\Common\ClassLoader('Symfony','Doctrine');
@@ -53,22 +48,19 @@ $config->setMetadataCacheImpl($cache);
 $config->setQueryCacheImpl($cache);
 
  $connectionOptions = array(
-    'driver' => 'pdo_mysql',
-    'dbname' => 'mgdb_dev',
-    'user' => 'root',
-    'password' => 'devpass',
-    'host' => 'localhost');
+    'driver' => DBDRIVER,
+    'dbname' => DBNAME,
+    'user' => DBUSER,
+    'password' => DBPASSWORD,
+    'host' => DBHOST);
 
 $em = \Doctrine\ORM\EntityManager::create($connectionOptions, $config);
 $helperSet = new \Symfony\Component\Console\Helper\HelperSet(array(
      'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($em->getConnection()),
      'em' => new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($em)
  ));
+
 // \Doctrine\ORM\Tools\Console\ConsoleRunner::run($helperSet);
 // exit;
-
-//require 'Slim/Slim.php';
-//\Slim\Slim::registerAutoloader();
-$app = new \Slim\Slim();
 
 ?>
