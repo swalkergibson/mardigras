@@ -15,7 +15,7 @@ class ScopeModel implements \OAuth2\Storage\ScopeInterface {
 
 		$result = $this->db->query('SELECT * FROM oauth_scopes WHERE scope = :scope', array(':scope' => $scope));
 		$row = $result->fetch();
- 
+
 		if ($row) {
 			return array(
 				'id'	=>	$row->id,

@@ -11,5 +11,12 @@
 	define('DBPASSWORD','devpass');
 	define('DBHOST','localhost');
 
+	// OAuth2 DB
+	define('OAUTH2DBNAME','mg_oauth');
+	define('OAUTH2DBUSER','root');
+	define('OAUTH2DBPASSWORD','devpass');
+	define('OAUTH2DBHOST','localhost');
+
 	// REST
+	define('HOSTURL', 'http://localhost:81/');
 	define('RESTBASE','api/api/');

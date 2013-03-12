@@ -22,7 +22,8 @@
 /* REST Routes */
 
     // Examples and tests
-    include __DIR__ . '/Routes/Examples/examples.php';
+    if (APPLICATION_ENV == "development")
+        include __DIR__ . '/Routes/Examples/examples.php';
 
     // Authentication methods
     include __DIR__ . '/Routes/Oauth2/oauth.php';

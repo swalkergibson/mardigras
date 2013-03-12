@@ -7,7 +7,7 @@ class DB {
 
 	function __construct()
 	{
-		$this->conn = new PDO('mysql:host='.OAUTH2DBHOST.';dbname='.OAUTH2DBNAME, OAUTH2DBUSER, OAUTH2DBPASSWORD);
+		$this->conn = new PDO('mysql:host=localhost;dbname=oauth-test', 'root', 'root');
 	}
 
 	function query($sql = '', $params = array())
@@ -22,5 +22,4 @@ class DB {
 	{
 		return (int) $this->conn->lastInsertId();
 	}
-
 }

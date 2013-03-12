@@ -3,15 +3,95 @@
 // Route Methods
 
 // Define Routes
-$app->get('/whoami','getWhoAmI');
+    // Show Example options
+    $app->get('/examples', function (){
+        echo "
+        <a href='/".RESTBASE."examples'>Show Examples</a><br/>
+        <a href='/".RESTBASE."whoami'>Return ip</a><br/>
+        <a href='/".RESTBASE."examples/signin'>Start Oauth2 Auth Flow</a><br/>
+        <a href='/".RESTBASE."examples/signinreturn'>returns to this after Oauth2 Auth complete</a><br/>
+        ";
+    });
+
+    // Return IP
+    $app->get('/whoami', function (){
+        echo $_SERVER['REMOTE_ADDR'];
+    });
+
+    // Send user to test Oauth2 Auth Flow
+    $app->get('/examples/signin', function () use ($app) {
+        $redirect_uri = 'http://localhost:81/api/api/examples/signinreturn';
+        $client_id = 'I6Lh72kTItE6y29Ig607N74M7i21oyTo';
+        $scope = 'user';
+        $state = 'examplestate';
+        $app->redirect('/'.RESTBASE.'oauth2/?client_id='.$client_id.'&redirect_uri=' . $redirect_uri . '&response_type=code&scope='.$scope.'&state='.$state);
+    });
+
+    // Receive test redirect
+    $app->get('/examples/signinreturn', function () use ($app) {
+        $request = $app->request();
+        $authCode = $request->get('code');
+        $state = $request->get('state');
+
+        $service_url = HOSTURL.RESTBASE.'/oauth2/access_token';
+        $curl = curl_init($service_url);
+        $curl_post_data = array(
+            "grant_type" => 'authorization_code',
+            "client_id" => 'I6Lh72kTItE6y29Ig607N74M7i21oyTo',
+            "client_secret" => 'dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ',
+            "redirect_uri" => 'http://localhost:81/api/api/examples/signinreturn',
+            "code" => $authCode
+            );
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
+        $curl_response = curl_exec($curl);
+        curl_close($curl);
+        $response = json_decode($curl_response);
+
+        if(isset($response->error))
+            print_r($response);
+        else
+        {
+            $_SESSION['Examples']['oauth2'] = $response;
+            $app->redirect('/'.RESTBASE.'examples/testclient');
+        }
+    });
+
+    $app->get('/examples/testclient', function () use ($app) {
+
+        if (!isset($_SESSION['Examples']['oauth2']))
+            $app->redirect('/'.RESTBASE.'examples');
+        else
+            $oauth = $_SESSION['Examples']['oauth2'];
+
+        echo '<form method="post"><input type="textbox" name="requesturl" size="200" value="'.HOSTURL.RESTBASE.'examples/testoauth2resource"/></form>';
+    });
+
+    $app->post('/examples/testclient', function () use ($app) {
+
+        if (!isset($_SESSION['Examples']['oauth2']))
+            $app->redirect('/'.RESTBASE.'examples');
+        else
+            $oauth = $_SESSION['Examples']['oauth2'];
+
+        $request = $app->request();
+        $requesturl = $request->post('requesturl');
 
 
-// Route Methods
-function getWhoAmI()
-{
-	echo $_SERVER['REMOTE_ADDR'];
-}
+        echo '<form method="post"><input type="textbox" name="requesturl" size="200" value="'.$requesturl.'"/></form>';
 
+        $service_url = $requesturl;
+        $curl = curl_init($service_url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $curl_response = curl_exec($curl);
+        curl_close($curl);
+        echo $curl_response;
+    });
+
+    $app->get('/examples/testoauth2resource', function () {
+        
+    });
 
 /*
 ///////////////////
