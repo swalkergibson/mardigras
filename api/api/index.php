@@ -18,6 +18,8 @@
     // Slim
     $app = new \Slim\Slim();
 
+    // OAuth2 Auth and Resource Servers
+    $oauth = new \Classes\OauthServer($app);
 
 /* REST Routes */
 

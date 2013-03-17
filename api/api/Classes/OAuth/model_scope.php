@@ -1,4 +1,5 @@
 <?php
+namespace Classes\OAuth;
 
 class ScopeModel implements \OAuth2\Storage\ScopeInterface {
 
@@ -6,13 +7,11 @@ class ScopeModel implements \OAuth2\Storage\ScopeInterface {
 
     public function __construct()
     {
-        require_once 'db.php';
         $this->db = new DB();
     }
 
 	public function getScope($scope)
 	{
-
 		$result = $this->db->query('SELECT * FROM oauth_scopes WHERE scope = :scope', array(':scope' => $scope));
 		$row = $result->fetch();
  
@@ -26,7 +25,5 @@ class ScopeModel implements \OAuth2\Storage\ScopeInterface {
 		} else {
 			return false;
 		}
-
 	}
-
 }

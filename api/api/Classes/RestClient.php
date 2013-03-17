@@ -1,4 +1,7 @@
 <?php
+namespace Classes;
+
+// I dont think we're actually going to use this class, maybe remove it?
 
 /** 
  * Class RestClient 

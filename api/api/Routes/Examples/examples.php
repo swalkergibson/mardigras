@@ -93,6 +93,10 @@
         
     });
 
+    $app->get('/examples/testclient', function () use ($app) {
+        
+    });
+
 /*
 ///////////////////
 //Doctrine example

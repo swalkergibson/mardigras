@@ -1,38 +1,20 @@
 <?php
 
-// Register Oauth2 Namespaces through Doctrine Auto Loader
-$classLoader = new \Doctrine\Common\ClassLoader('OAuth2\Storage', 'Routes\\Oauth2\\vendor\\lncd\\Oauth2\\src\\');
-$classLoader->register();
-
-$classLoader = new \Doctrine\Common\ClassLoader('OAuth2\Util', 'Routes\\Oauth2\\vendor\\lncd\\Oauth2\\src\\');
-$classLoader->register();
-
-$classLoader = new \Doctrine\Common\ClassLoader('OAuth2', 'Routes\\Oauth2\\vendor\\lncd\\Oauth2\\src\\');
-$classLoader->register();
-
-
-// Include the storage models
-include 'model_client.php';
-include 'model_scope.php';
-include 'model_session.php';
-
 // Initiate the Request handler
 $request = new \OAuth2\Util\Request();
 
-// Initiate the auth server with the models
-$server = new \OAuth2\AuthServer(new ClientModel, new SessionModel, new ScopeModel);
 
 // Enable support for the authorization code grant
-$server->addGrantType(new \OAuth2\Grant\AuthCode());
+$oauth->auth->addGrantType(new \OAuth2\Grant\AuthCode());
 
 
 /* Define our Oauth2 RESTful routes */
 
 // Clients will redirect to this address
-$app->get('/oauth2/', function () use ($server, $app) {
+$app->get('/oauth2/', function () use ($oauth, $app) {
 
 	// Tell the auth server to check the required parameters are in the query string
-	$params = $server->checkAuthoriseParams();
+	$params = $oauth->auth->checkAuthoriseParams();
 
 	// Save the verified parameters to the user's session
 	$_SESSION['params'] = serialize($params);
@@ -155,8 +137,9 @@ $app->get('/oauth2/authorise', function () use ($app) {
 
 
 // Process authorise form
-$app->post('/oauth2/authorise', function() use ($server, $app) {
-
+$app->post('/oauth2/authorise', function() use ($oauth, $app) {
+	$auth = $oauth->auth;
+	
 	// Check the auth params are in the session
 	if ( ! isset($_SESSION['params']))
 	{
@@ -174,7 +157,7 @@ $app->post('/oauth2/authorise', function() use ($server, $app) {
 	// If the user approves the client then generate an authoriztion code
 	if (isset($_POST['approve']))
 	{
-		$authCode = $server->newAuthoriseRequest('user', $params['user_id'], $params);
+		$authCode = $oauth->auth->newAuthoriseRequest('user', $params['user_id'], $params);
 
 		// Generate the redirect URI
 		$redirectUri = OAuth2\Util\RedirectUri::make($params['redirect_uri'], array(
@@ -189,7 +172,7 @@ $app->post('/oauth2/authorise', function() use ($server, $app) {
 	{
 		$redirectUri = OAuth2\Util\RedirectUri::make($params['redirect_uri'], array(
 			'error' => 'access_denied',
-			'error_message' => $server::getExceptionMessage('access_denied'),
+			'error_message' => $auth::getExceptionMessage('access_denied'),
 			'state'	=> $params['state']
 		));
 		$app->redirect($redirectUri);
@@ -200,14 +183,14 @@ $app->post('/oauth2/authorise', function() use ($server, $app) {
 
 
 // The client will exchange the authorization code for an access token
-$app->post('/oauth2/access_token', function() use ($server) {
+$app->post('/oauth2/access_token', function() use ($oauth) {
 
 	header('Content-type: application/javascript');
 
 	try {
 
 		// Issue an access token
-		$p = $server->issueAccessToken();
+		$p = $oauth->auth->issueAccessToken();
 		echo json_encode($p);
 
 	}

@@ -20,6 +20,22 @@ $classLoader->register();
 $classLoader = new \Doctrine\Common\ClassLoader('Symfony','Doctrine');
 $classLoader->register();
 
+$classLoader = new \Doctrine\Common\ClassLoader('Classes');
+$classLoader->register();
+
+$classLoader = new \Doctrine\Common\ClassLoader('Classes\OAuth');
+$classLoader->register();
+
+// Register OAuth2 Namespaces through Doctrine Auto Loader
+$classLoader = new \Doctrine\Common\ClassLoader('OAuth2\Storage', 'Routes\\Oauth2\\vendor\\lncd\\Oauth2\\src\\');
+$classLoader->register();
+
+$classLoader = new \Doctrine\Common\ClassLoader('OAuth2\Util', 'Routes\\Oauth2\\vendor\\lncd\\Oauth2\\src\\');
+$classLoader->register();
+
+$classLoader = new \Doctrine\Common\ClassLoader('OAuth2', 'Routes\\Oauth2\\vendor\\lncd\\Oauth2\\src\\');
+$classLoader->register();
+
 
 // configuration (2)
 $config = new \Doctrine\ORM\Configuration();
@@ -62,5 +78,3 @@ $helperSet = new \Symfony\Component\Console\Helper\HelperSet(array(
 
 // \Doctrine\ORM\Tools\Console\ConsoleRunner::run($helperSet);
 // exit;
-
-?>

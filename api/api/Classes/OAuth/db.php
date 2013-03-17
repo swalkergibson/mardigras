@@ -1,4 +1,5 @@
 <?php
+namespace Classes\OAuth;
 
 class DB {
 
@@ -7,13 +8,13 @@ class DB {
 
 	function __construct()
 	{
-		$this->conn = new PDO('mysql:host='.OAUTH2DBHOST.';dbname='.OAUTH2DBNAME, OAUTH2DBUSER, OAUTH2DBPASSWORD);
+		$this->conn = new \PDO('mysql:host='.OAUTH2DBHOST.';dbname='.OAUTH2DBNAME, OAUTH2DBUSER, OAUTH2DBPASSWORD);
 	}
 
 	function query($sql = '', $params = array())
 	{
 		$statement = $this->conn->prepare($sql);
-		$statement->setFetchMode(PDO::FETCH_OBJ);
+		$statement->setFetchMode(\PDO::FETCH_OBJ);
 		$statement->execute($params);
 		return $statement;
 	}
