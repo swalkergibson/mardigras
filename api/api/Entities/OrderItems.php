@@ -1,5 +1,4 @@
 <?php
-Namespace Entities;
 
 
 
@@ -25,16 +24,16 @@ class OrderItems
     /**
      * @var integer
      *
-     * @Column(name="qty_ordered", type="integer", nullable=false)
+     * @Column(name="quantity_ordered", type="integer", nullable=false)
      */
-    private $qtyOrdered;
+    private $quantityOrdered;
 
     /**
      * @var integer
      *
-     * @Column(name="qty_received", type="integer", nullable=true)
+     * @Column(name="quantity_received", type="integer", nullable=true)
      */
-    private $qtyReceived;
+    private $quantityReceived;
 
     /**
      * @var float
@@ -53,6 +52,7 @@ class OrderItems
     /**
      * @var \Orders
      *
+     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Orders")
      * @JoinColumns({
@@ -64,6 +64,7 @@ class OrderItems
     /**
      * @var \Inventory
      *
+     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Inventory")
      * @JoinColumns({
@@ -84,49 +85,49 @@ class OrderItems
     }
 
     /**
-     * Set qtyOrdered
+     * Set quantityOrdered
      *
-     * @param integer $qtyOrdered
+     * @param integer $quantityOrdered
      * @return OrderItems
      */
-    public function setQtyOrdered($qtyOrdered)
+    public function setQuantityOrdered($quantityOrdered)
     {
-        $this->qtyOrdered = $qtyOrdered;
+        $this->quantityOrdered = $quantityOrdered;
     
         return $this;
     }
 
     /**
-     * Get qtyOrdered
+     * Get quantityOrdered
      *
      * @return integer 
      */
-    public function getQtyOrdered()
+    public function getQuantityOrdered()
     {
-        return $this->qtyOrdered;
+        return $this->quantityOrdered;
     }
 
     /**
-     * Set qtyReceived
+     * Set quantityReceived
      *
-     * @param integer $qtyReceived
+     * @param integer $quantityReceived
      * @return OrderItems
      */
-    public function setQtyReceived($qtyReceived)
+    public function setQuantityReceived($quantityReceived)
     {
-        $this->qtyReceived = $qtyReceived;
+        $this->quantityReceived = $quantityReceived;
     
         return $this;
     }
 
     /**
-     * Get qtyReceived
+     * Get quantityReceived
      *
      * @return integer 
      */
-    public function getQtyReceived()
+    public function getQuantityReceived()
     {
-        return $this->qtyReceived;
+        return $this->quantityReceived;
     }
 
     /**

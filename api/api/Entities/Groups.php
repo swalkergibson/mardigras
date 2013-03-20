@@ -1,5 +1,4 @@
 <?php
-Namespace Entities;
 
 
 
@@ -30,8 +29,23 @@ class Groups
     private $name;
 
     /**
+     * @var string
+     *
+     * @Column(name="phone", type="string", length=12, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @Column(name="fax", type="string", length=12, nullable=true)
+     */
+    private $fax;
+
+    /**
      * @var \Customers
      *
+     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Customers")
      * @JoinColumns({
@@ -39,6 +53,18 @@ class Groups
      * })
      */
     private $adminCustomer;
+
+    /**
+     * @var \GroupTypes
+     *
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
+     * @OneToOne(targetEntity="GroupTypes")
+     * @JoinColumns({
+     *   @JoinColumn(name="group_type_id", referencedColumnName="id")
+     * })
+     */
+    private $groupType;
 
 
     /**
@@ -75,6 +101,52 @@ class Groups
     }
 
     /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Groups
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set fax
+     *
+     * @param string $fax
+     * @return Groups
+     */
+    public function setFax($fax)
+    {
+        $this->fax = $fax;
+    
+        return $this;
+    }
+
+    /**
+     * Get fax
+     *
+     * @return string 
+     */
+    public function getFax()
+    {
+        return $this->fax;
+    }
+
+    /**
      * Set adminCustomer
      *
      * @param \Customers $adminCustomer
@@ -95,5 +167,28 @@ class Groups
     public function getAdminCustomer()
     {
         return $this->adminCustomer;
+    }
+
+    /**
+     * Set groupType
+     *
+     * @param \GroupTypes $groupType
+     * @return Groups
+     */
+    public function setGroupType(\GroupTypes $groupType)
+    {
+        $this->groupType = $groupType;
+    
+        return $this;
+    }
+
+    /**
+     * Get groupType
+     *
+     * @return \GroupTypes 
+     */
+    public function getGroupType()
+    {
+        return $this->groupType;
     }
 }

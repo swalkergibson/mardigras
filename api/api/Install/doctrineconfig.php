@@ -5,7 +5,6 @@ The documentation mentioned above was used due to the official doc being under c
 
 <?PHP
 # before using, backup and remove old entity classes, then remove the exit() below.
-exit();
 use Doctrine\ORM\Tools\EntityGenerator;
 
 ini_set("display_errors", "On");
@@ -33,9 +32,9 @@ $config->setProxyDir(__DIR__ . '/Proxies');
 $config->setProxyNamespace('Proxies');
 
 $connectionParams = array(
-  'dbname' => '',
+  'dbname' => 'mgdb_dev',
   'user' => 'root',
-  'password' => '',
+  'password' => 'devpass',
   'host' => 'localhost',
   'driver' => 'pdo_mysql',
 );

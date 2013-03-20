@@ -1,5 +1,4 @@
 <?php
-Namespace Entities;
 
 
 
@@ -21,13 +20,6 @@ class Customers
      * @GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @Column(name="customer_ref_id", type="string", length=12, nullable=false)
-     */
-    private $customerRefId;
 
     /**
      * @var string
@@ -84,6 +76,13 @@ class Customers
      * @Column(name="phone", type="string", length=12, nullable=true)
      */
     private $phone;
+
+    /**
+     * @var string
+     *
+     * @Column(name="fax", type="string", length=12, nullable=true)
+     */
+    private $fax;
 
     /**
      * @var string
@@ -156,17 +155,6 @@ class Customers
     private $lastUpdateDate;
 
     /**
-     * @var \CustomerTypes
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="CustomerTypes")
-     * @JoinColumns({
-     *   @JoinColumn(name="customer_type_id", referencedColumnName="id")
-     * })
-     */
-    private $customerType;
-
-    /**
      * @var \Groups
      *
      * @ManyToOne(targetEntity="Groups")
@@ -185,29 +173,6 @@ class Customers
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set customerRefId
-     *
-     * @param string $customerRefId
-     * @return Customers
-     */
-    public function setCustomerRefId($customerRefId)
-    {
-        $this->customerRefId = $customerRefId;
-    
-        return $this;
-    }
-
-    /**
-     * Get customerRefId
-     *
-     * @return string 
-     */
-    public function getCustomerRefId()
-    {
-        return $this->customerRefId;
     }
 
     /**
@@ -392,6 +357,29 @@ class Customers
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set fax
+     *
+     * @param string $fax
+     * @return Customers
+     */
+    public function setFax($fax)
+    {
+        $this->fax = $fax;
+    
+        return $this;
+    }
+
+    /**
+     * Get fax
+     *
+     * @return string 
+     */
+    public function getFax()
+    {
+        return $this->fax;
     }
 
     /**
@@ -622,29 +610,6 @@ class Customers
     public function getLastUpdateDate()
     {
         return $this->lastUpdateDate;
-    }
-
-    /**
-     * Set customerType
-     *
-     * @param \CustomerTypes $customerType
-     * @return Customers
-     */
-    public function setCustomerType(\CustomerTypes $customerType)
-    {
-        $this->customerType = $customerType;
-    
-        return $this;
-    }
-
-    /**
-     * Get customerType
-     *
-     * @return \CustomerTypes 
-     */
-    public function getCustomerType()
-    {
-        return $this->customerType;
     }
 
     /**

@@ -1,5 +1,4 @@
 <?php
-Namespace Entities;
 
 
 
@@ -37,11 +36,18 @@ class Inventory
     private $description;
 
     /**
+     * @var string
+     *
+     * @Column(name="short_description", type="string", length=200, nullable=true)
+     */
+    private $shortDescription;
+
+    /**
      * @var integer
      *
-     * @Column(name="qty", type="integer", nullable=false)
+     * @Column(name="quantity", type="integer", nullable=false)
      */
-    private $qty;
+    private $quantity;
 
     /**
      * @var float
@@ -74,9 +80,9 @@ class Inventory
     /**
      * @var integer
      *
-     * @Column(name="min_qty", type="integer", nullable=true)
+     * @Column(name="min_quantity", type="integer", nullable=true)
      */
-    private $minQty;
+    private $minQuantity;
 
     /**
      * @var integer
@@ -95,6 +101,7 @@ class Inventory
     /**
      * @var \Vendors
      *
+     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Vendors")
      * @JoinColumns({
@@ -106,6 +113,7 @@ class Inventory
     /**
      * @var \Category
      *
+     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Category")
      * @JoinColumns({
@@ -172,26 +180,49 @@ class Inventory
     }
 
     /**
-     * Set qty
+     * Set shortDescription
      *
-     * @param integer $qty
+     * @param string $shortDescription
      * @return Inventory
      */
-    public function setQty($qty)
+    public function setShortDescription($shortDescription)
     {
-        $this->qty = $qty;
+        $this->shortDescription = $shortDescription;
     
         return $this;
     }
 
     /**
-     * Get qty
+     * Get shortDescription
+     *
+     * @return string 
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * Set quantity
+     *
+     * @param integer $quantity
+     * @return Inventory
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    
+        return $this;
+    }
+
+    /**
+     * Get quantity
      *
      * @return integer 
      */
-    public function getQty()
+    public function getQuantity()
     {
-        return $this->qty;
+        return $this->quantity;
     }
 
     /**
@@ -287,26 +318,26 @@ class Inventory
     }
 
     /**
-     * Set minQty
+     * Set minQuantity
      *
-     * @param integer $minQty
+     * @param integer $minQuantity
      * @return Inventory
      */
-    public function setMinQty($minQty)
+    public function setMinQuantity($minQuantity)
     {
-        $this->minQty = $minQty;
+        $this->minQuantity = $minQuantity;
     
         return $this;
     }
 
     /**
-     * Get minQty
+     * Get minQuantity
      *
      * @return integer 
      */
-    public function getMinQty()
+    public function getMinQuantity()
     {
-        return $this->minQty;
+        return $this->minQuantity;
     }
 
     /**

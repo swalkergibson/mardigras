@@ -1,14 +1,15 @@
 <?php
-Namespace Entities;
+
+
 
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Clerks
  *
  * @Table(name="clerks")
  * @Entity
  */
-
 class Clerks
 {
     /**
@@ -35,11 +36,44 @@ class Clerks
     private $name;
 
     /**
-     * @var Entities\clerkGroups
-     * @manyToOne(targetEntity="ClerkGroups", inversedBy="id")
-     * @JoinColumn(name="clerk_group_id", referencedColumnName="id")
+     * @var string
+     *
+     * @Column(name="password_hash", type="string", length=128, nullable=false)
      */
-    private $ClerkGroup;
+    private $passwordHash;
+
+    /**
+     * @var string
+     *
+     * @Column(name="password_salt", type="string", length=16, nullable=false)
+     */
+    private $passwordSalt;
+
+    /**
+     * @var \DateTime
+     *
+     * @Column(name="date_created", type="datetime", nullable=false)
+     */
+    private $dateCreated;
+
+    /**
+     * @var \DateTime
+     *
+     * @Column(name="date_last_login", type="datetime", nullable=true)
+     */
+    private $dateLastLogin;
+
+    /**
+     * @var \ClerkGroups
+     *
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
+     * @OneToOne(targetEntity="ClerkGroups")
+     * @JoinColumns({
+     *   @JoinColumn(name="clerk_group_id", referencedColumnName="id")
+     * })
+     */
+    private $clerkGroup;
 
 
     /**
@@ -99,12 +133,104 @@ class Clerks
     }
 
     /**
-     * Set clerkGroup
+     * Set passwordHash
      *
-     * @param Entities\ClerkGroups $clerkGroup
+     * @param string $passwordHash
      * @return Clerks
      */
-    public function setClerkGroup(ClerkGroups $clerkGroup)
+    public function setPasswordHash($passwordHash)
+    {
+        $this->passwordHash = $passwordHash;
+    
+        return $this;
+    }
+
+    /**
+     * Get passwordHash
+     *
+     * @return string 
+     */
+    public function getPasswordHash()
+    {
+        return $this->passwordHash;
+    }
+
+    /**
+     * Set passwordSalt
+     *
+     * @param string $passwordSalt
+     * @return Clerks
+     */
+    public function setPasswordSalt($passwordSalt)
+    {
+        $this->passwordSalt = $passwordSalt;
+    
+        return $this;
+    }
+
+    /**
+     * Get passwordSalt
+     *
+     * @return string 
+     */
+    public function getPasswordSalt()
+    {
+        return $this->passwordSalt;
+    }
+
+    /**
+     * Set dateCreated
+     *
+     * @param \DateTime $dateCreated
+     * @return Clerks
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this->dateCreated = $dateCreated;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateCreated
+     *
+     * @return \DateTime 
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
+
+    /**
+     * Set dateLastLogin
+     *
+     * @param \DateTime $dateLastLogin
+     * @return Clerks
+     */
+    public function setDateLastLogin($dateLastLogin)
+    {
+        $this->dateLastLogin = $dateLastLogin;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateLastLogin
+     *
+     * @return \DateTime 
+     */
+    public function getDateLastLogin()
+    {
+        return $this->dateLastLogin;
+    }
+
+    /**
+     * Set clerkGroup
+     *
+     * @param \ClerkGroups $clerkGroup
+     * @return Clerks
+     */
+    public function setClerkGroup(\ClerkGroups $clerkGroup)
     {
         $this->clerkGroup = $clerkGroup;
     
@@ -114,7 +240,7 @@ class Clerks
     /**
      * Get clerkGroup
      *
-     * @return Entities\ClerkGroups 
+     * @return \ClerkGroups 
      */
     public function getClerkGroup()
     {

@@ -1,5 +1,4 @@
 <?php
-Namespace Entities;
 
 
 
@@ -23,13 +22,6 @@ class InvoiceItems
     private $id;
 
     /**
-     * @var integer
-     *
-     * @Column(name="flags", type="integer", nullable=true)
-     */
-    private $flags;
-
-    /**
      * @var float
      *
      * @Column(name="price", type="decimal", nullable=true)
@@ -37,25 +29,25 @@ class InvoiceItems
     private $price;
 
     /**
-     * @var integer
+     * @var float
      *
-     * @Column(name="rental_rate", type="integer", nullable=true)
+     * @Column(name="rental_rate", type="decimal", nullable=true)
      */
     private $rentalRate;
 
     /**
      * @var float
      *
-     * @Column(name="discount", type="float", nullable=true)
+     * @Column(name="discount", type="decimal", nullable=true)
      */
     private $discount;
 
     /**
      * @var integer
      *
-     * @Column(name="qty", type="integer", nullable=true)
+     * @Column(name="quantity", type="integer", nullable=true)
      */
-    private $qty;
+    private $quantity;
 
     /**
      * @var integer
@@ -63,13 +55,6 @@ class InvoiceItems
      * @Column(name="tax_exempt", type="integer", nullable=true)
      */
     private $taxExempt;
-
-    /**
-     * @var \DateTime
-     *
-     * @Column(name="date_created", type="datetime", nullable=true)
-     */
-    private $dateCreated;
 
     /**
      * @var \DateTime
@@ -102,6 +87,7 @@ class InvoiceItems
     /**
      * @var \Invoices
      *
+     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Invoices")
      * @JoinColumns({
@@ -113,6 +99,7 @@ class InvoiceItems
     /**
      * @var \Inventory
      *
+     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Inventory")
      * @JoinColumns({
@@ -130,29 +117,6 @@ class InvoiceItems
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set flags
-     *
-     * @param integer $flags
-     * @return InvoiceItems
-     */
-    public function setFlags($flags)
-    {
-        $this->flags = $flags;
-    
-        return $this;
-    }
-
-    /**
-     * Get flags
-     *
-     * @return integer 
-     */
-    public function getFlags()
-    {
-        return $this->flags;
     }
 
     /**
@@ -181,7 +145,7 @@ class InvoiceItems
     /**
      * Set rentalRate
      *
-     * @param integer $rentalRate
+     * @param float $rentalRate
      * @return InvoiceItems
      */
     public function setRentalRate($rentalRate)
@@ -194,7 +158,7 @@ class InvoiceItems
     /**
      * Get rentalRate
      *
-     * @return integer 
+     * @return float 
      */
     public function getRentalRate()
     {
@@ -225,26 +189,26 @@ class InvoiceItems
     }
 
     /**
-     * Set qty
+     * Set quantity
      *
-     * @param integer $qty
+     * @param integer $quantity
      * @return InvoiceItems
      */
-    public function setQty($qty)
+    public function setQuantity($quantity)
     {
-        $this->qty = $qty;
+        $this->quantity = $quantity;
     
         return $this;
     }
 
     /**
-     * Get qty
+     * Get quantity
      *
      * @return integer 
      */
-    public function getQty()
+    public function getQuantity()
     {
-        return $this->qty;
+        return $this->quantity;
     }
 
     /**
@@ -268,29 +232,6 @@ class InvoiceItems
     public function getTaxExempt()
     {
         return $this->taxExempt;
-    }
-
-    /**
-     * Set dateCreated
-     *
-     * @param \DateTime $dateCreated
-     * @return InvoiceItems
-     */
-    public function setDateCreated($dateCreated)
-    {
-        $this->dateCreated = $dateCreated;
-    
-        return $this;
-    }
-
-    /**
-     * Get dateCreated
-     *
-     * @return \DateTime 
-     */
-    public function getDateCreated()
-    {
-        return $this->dateCreated;
     }
 
     /**

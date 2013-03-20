@@ -1,5 +1,4 @@
 <?php
-Namespace Entities;
 
 
 
@@ -32,7 +31,7 @@ class Vendors
     /**
      * @var string
      *
-     * @Column(name="name", type="string", length=300, nullable=true)
+     * @Column(name="name", type="string", length=100, nullable=true)
      */
     private $name;
 
