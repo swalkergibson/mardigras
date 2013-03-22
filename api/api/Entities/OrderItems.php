@@ -1,5 +1,5 @@
 <?php
-
+Namespace Entities;
 
 
 use Doctrine\ORM\Mapping as ORM;
@@ -52,7 +52,6 @@ class OrderItems
     /**
      * @var \Orders
      *
-     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Orders")
      * @JoinColumns({
@@ -64,7 +63,6 @@ class OrderItems
     /**
      * @var \Inventory
      *
-     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Inventory")
      * @JoinColumns({

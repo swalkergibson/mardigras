@@ -1,5 +1,5 @@
 <?php
-
+Namespace Entities;
 
 
 use Doctrine\ORM\Mapping as ORM;

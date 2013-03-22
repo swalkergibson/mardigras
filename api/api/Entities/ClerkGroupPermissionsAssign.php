@@ -1,5 +1,5 @@
 <?php
-
+Namespace Entities;
 
 
 use Doctrine\ORM\Mapping as ORM;
@@ -36,28 +36,18 @@ class ClerkGroupPermissionsAssign
     private $deny;
 
     /**
-     * @var \ClerkGroups
-     *
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="ClerkGroups")
-     * @JoinColumns({
-     *   @JoinColumn(name="clerk_group_id", referencedColumnName="id")
-     * })
+     * @var Entities\ClerkGroups
+     * @manyToOne(targetEntity="ClerkGroups", inversedBy="permissionAssignments")
+     * @JoinColumn(name="clerk_group_id", referencedColumnName="id")
      */
     private $clerkGroup;
 
     /**
-     * @var \ClerkGroupPermissions
-     *
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="ClerkGroupPermissions")
-     * @JoinColumns({
-     *   @JoinColumn(name="clerk_group_permissions_id", referencedColumnName="id")
-     * })
+     * @var Entities\ClerkGroupPermissions
+     * @manyToOne(targetEntity="ClerkGroupPermissions", inversedBy="permissionAssignments")
+     * @JoinColumn(name="clerk_group_permissions_id", referencedColumnName="id")
      */
-    private $clerkGroupPermissions;
+    private $clerkGroupPermission;
 
 
     /**
@@ -119,10 +109,10 @@ class ClerkGroupPermissionsAssign
     /**
      * Set clerkGroup
      *
-     * @param \ClerkGroups $clerkGroup
+     * @param Entities\ClerkGroups $clerkGroup
      * @return ClerkGroupPermissionsAssign
      */
-    public function setClerkGroup(\ClerkGroups $clerkGroup)
+    public function setClerkGroup(ClerkGroups $clerkGroup)
     {
         $this->clerkGroup = $clerkGroup;
     
@@ -132,7 +122,7 @@ class ClerkGroupPermissionsAssign
     /**
      * Get clerkGroup
      *
-     * @return \ClerkGroups 
+     * @return Entities\ClerkGroups 
      */
     public function getClerkGroup()
     {
@@ -140,25 +130,25 @@ class ClerkGroupPermissionsAssign
     }
 
     /**
-     * Set clerkGroupPermissions
+     * Set clerkGroupPermission
      *
-     * @param \ClerkGroupPermissions $clerkGroupPermissions
+     * @param Entities\ClerkGroupPermissions $clerkGroupPermission
      * @return ClerkGroupPermissionsAssign
      */
-    public function setClerkGroupPermissions(\ClerkGroupPermissions $clerkGroupPermissions)
+    public function setClerkGroupPermission(ClerkGroupPermissions $clerkGroupPermission)
     {
-        $this->clerkGroupPermissions = $clerkGroupPermissions;
+        $this->clerkGroupPermission = $clerkGroupPermission;
     
         return $this;
     }
 
     /**
-     * Get clerkGroupPermissions
+     * Get clerkGroupPermission
      *
-     * @return \ClerkGroupPermissions 
+     * @return Entities\ClerkGroupPermission 
      */
-    public function getClerkGroupPermissions()
+    public function getClerkGroupPermission()
     {
-        return $this->clerkGroupPermissions;
+        return $this->clerkGroupPermission;
     }
 }

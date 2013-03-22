@@ -1,5 +1,5 @@
 <?php
-
+Namespace Entities;
 
 
 use Doctrine\ORM\Mapping as ORM;
@@ -35,6 +35,10 @@ class OrderStatus
      */
     private $complete;
 
+    /**
+     * @OneToMany(targetEntity="Orders", mappedBy="orderStatus")
+    */
+    protected  $orders;
 
     /**
      * Get id
@@ -91,4 +95,27 @@ class OrderStatus
     {
         return $this->complete;
     }
+
+    /**
+     * Set orders
+     *
+     * @param Entities\Orders $orders
+     * @return OrderStatus
+     */
+    public function setOrders(Orders $orders)
+    {
+        $this->orders = $orders;
+    
+        return $this;
+    }
+
+    /**
+     * Get orders
+     *
+     * @return Entities\Orders 
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }    
 }

@@ -1,5 +1,5 @@
 <?php
-
+Namespace Entities;
 
 
 use Doctrine\ORM\Mapping as ORM;
@@ -85,31 +85,22 @@ class Orders
     private $submitDate;
 
     /**
-     * @var \OrderStatus
-     *
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="OrderStatus")
-     * @JoinColumns({
-     *   @JoinColumn(name="order_status_id", referencedColumnName="id")
-     * })
+     * @var Entities\OrderStatus
+     * @manyToOne(targetEntity="OrderStatus", inversedBy="orders")
+     * @JoinColumn(name="order_status_id", referencedColumnName="id")
      */
     private $orderStatus;
 
     /**
-     * @var \OrderSubmitMethods
-     *
-     * @ManyToOne(targetEntity="OrderSubmitMethods")
-     * @JoinColumns({
-     *   @JoinColumn(name="order_submit_method_id", referencedColumnName="id")
-     * })
+     * @var Entities\OrderSubmitMethods
+     * @manyToOne(targetEntity="OrderSubmitMethods", inversedBy="orders")
+     * @JoinColumn(name="order_submit_method_id", referencedColumnName="id")
      */
     private $orderSubmitMethod;
 
     /**
      * @var \Vendors
      *
-     * @Id
      * @GeneratedValue(strategy="IDENTITY")
      * @OneToOne(targetEntity="Vendors")
      * @JoinColumns({
@@ -119,14 +110,9 @@ class Orders
     private $vendor;
 
     /**
-     * @var \Clerks
-     *
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Clerks")
-     * @JoinColumns({
-     *   @JoinColumn(name="clerk_id", referencedColumnName="id")
-     * })
+     * @var Entities\Clerks
+     * @manyToOne(targetEntity="Clerks", inversedBy="orders")
+     * @JoinColumn(name="clerk_id", referencedColumnName="id")
      */
     private $clerk;
 
@@ -351,10 +337,10 @@ class Orders
     /**
      * Set orderStatus
      *
-     * @param \OrderStatus $orderStatus
+     * @param Entities\OrderStatus $orderStatus
      * @return Orders
      */
-    public function setOrderStatus(\OrderStatus $orderStatus)
+    public function setOrderStatus(OrderStatus $orderStatus)
     {
         $this->orderStatus = $orderStatus;
     
@@ -364,7 +350,7 @@ class Orders
     /**
      * Get orderStatus
      *
-     * @return \OrderStatus 
+     * @return Entities\OrderStatus 
      */
     public function getOrderStatus()
     {
@@ -374,10 +360,10 @@ class Orders
     /**
      * Set orderSubmitMethod
      *
-     * @param \OrderSubmitMethods $orderSubmitMethod
+     * @param Entities\OrderSubmitMethods $orderSubmitMethod
      * @return Orders
      */
-    public function setOrderSubmitMethod(\OrderSubmitMethods $orderSubmitMethod = null)
+    public function setOrderSubmitMethod(OrderSubmitMethods $orderSubmitMethod = null)
     {
         $this->orderSubmitMethod = $orderSubmitMethod;
     
@@ -387,7 +373,7 @@ class Orders
     /**
      * Get orderSubmitMethod
      *
-     * @return \OrderSubmitMethods 
+     * @return Entities\OrderSubmitMethods 
      */
     public function getOrderSubmitMethod()
     {
@@ -420,10 +406,10 @@ class Orders
     /**
      * Set clerk
      *
-     * @param \Clerks $clerk
+     * @param Entities\Clerks $clerk
      * @return Orders
      */
-    public function setClerk(\Clerks $clerk)
+    public function setClerk(Clerks $clerk)
     {
         $this->clerk = $clerk;
     
@@ -433,7 +419,7 @@ class Orders
     /**
      * Get clerk
      *
-     * @return \Clerks 
+     * @return Entities\Clerks 
      */
     public function getClerk()
     {

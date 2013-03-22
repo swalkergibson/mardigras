@@ -1,5 +1,5 @@
 <?php
-
+Namespace Entities;
 
 
 use Doctrine\ORM\Mapping as ORM;
@@ -64,17 +64,16 @@ class Clerks
     private $dateLastLogin;
 
     /**
-     * @var \ClerkGroups
-     *
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="ClerkGroups")
-     * @JoinColumns({
-     *   @JoinColumn(name="clerk_group_id", referencedColumnName="id")
-     * })
+     * @var Entities\ClerkGroups
+     * @manyToOne(targetEntity="ClerkGroups", inversedBy="clerksInGroup")
+     * @JoinColumn(name="clerk_group_id", referencedColumnName="id")
      */
     private $clerkGroup;
 
+    /**
+     * @OneToMany(targetEntity="Orders", mappedBy="clerk")
+    */
+    protected  $orders;
 
     /**
      * Get id
@@ -227,10 +226,10 @@ class Clerks
     /**
      * Set clerkGroup
      *
-     * @param \ClerkGroups $clerkGroup
+     * @param Entities\ClerkGroups $clerkGroup
      * @return Clerks
      */
-    public function setClerkGroup(\ClerkGroups $clerkGroup)
+    public function setClerkGroup(ClerkGroups $clerkGroup)
     {
         $this->clerkGroup = $clerkGroup;
     
@@ -240,10 +239,33 @@ class Clerks
     /**
      * Get clerkGroup
      *
-     * @return \ClerkGroups 
+     * @return Entities\ClerkGroups 
      */
     public function getClerkGroup()
     {
         return $this->clerkGroup;
+    }
+
+    /**
+     * Set orders
+     *
+     * @param Entities\Orders $orders
+     * @return Clerks
+     */
+    public function setOrders(Orders $orders)
+    {
+        $this->orders = $orders;
+    
+        return $this;
+    }
+
+    /**
+     * Get orders
+     *
+     * @return Entities\Orders 
+     */
+    public function getOrders()
+    {
+        return $this->orders;
     }
 }

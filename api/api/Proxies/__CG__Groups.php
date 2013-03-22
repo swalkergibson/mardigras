@@ -63,6 +63,30 @@ class Groups extends \Groups implements \Doctrine\ORM\Proxy\Proxy
         return parent::getName();
     }
 
+    public function setPhone($phone)
+    {
+        $this->__load();
+        return parent::setPhone($phone);
+    }
+
+    public function getPhone()
+    {
+        $this->__load();
+        return parent::getPhone();
+    }
+
+    public function setFax($fax)
+    {
+        $this->__load();
+        return parent::setFax($fax);
+    }
+
+    public function getFax()
+    {
+        $this->__load();
+        return parent::getFax();
+    }
+
     public function setAdminCustomer(\Customers $adminCustomer)
     {
         $this->__load();
@@ -75,10 +99,22 @@ class Groups extends \Groups implements \Doctrine\ORM\Proxy\Proxy
         return parent::getAdminCustomer();
     }
 
+    public function setGroupType(\GroupTypes $groupType)
+    {
+        $this->__load();
+        return parent::setGroupType($groupType);
+    }
+
+    public function getGroupType()
+    {
+        $this->__load();
+        return parent::getGroupType();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'name', 'adminCustomer');
+        return array('__isInitialized__', 'id', 'name', 'phone', 'fax', 'adminCustomer', 'groupType');
     }
 
     public function __clone()

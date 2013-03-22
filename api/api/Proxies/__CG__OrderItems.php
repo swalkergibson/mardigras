@@ -51,28 +51,28 @@ class OrderItems extends \OrderItems implements \Doctrine\ORM\Proxy\Proxy
         return parent::getId();
     }
 
-    public function setQtyOrdered($qtyOrdered)
+    public function setQuantityOrdered($quantityOrdered)
     {
         $this->__load();
-        return parent::setQtyOrdered($qtyOrdered);
+        return parent::setQuantityOrdered($quantityOrdered);
     }
 
-    public function getQtyOrdered()
+    public function getQuantityOrdered()
     {
         $this->__load();
-        return parent::getQtyOrdered();
+        return parent::getQuantityOrdered();
     }
 
-    public function setQtyReceived($qtyReceived)
+    public function setQuantityReceived($quantityReceived)
     {
         $this->__load();
-        return parent::setQtyReceived($qtyReceived);
+        return parent::setQuantityReceived($quantityReceived);
     }
 
-    public function getQtyReceived()
+    public function getQuantityReceived()
     {
         $this->__load();
-        return parent::getQtyReceived();
+        return parent::getQuantityReceived();
     }
 
     public function setCurrentCost($currentCost)
@@ -126,7 +126,7 @@ class OrderItems extends \OrderItems implements \Doctrine\ORM\Proxy\Proxy
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'qtyOrdered', 'qtyReceived', 'currentCost', 'price', 'order', 'inventory');
+        return array('__isInitialized__', 'id', 'quantityOrdered', 'quantityReceived', 'currentCost', 'price', 'order', 'inventory');
     }
 
     public function __clone()

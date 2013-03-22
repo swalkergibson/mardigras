@@ -18,6 +18,30 @@
         echo $_SERVER['REMOTE_ADDR'];
     });
 
+
+    $app->get('/examples/test', function() use ($app,$em){
+        $dql = 'SELECT
+                    c, g, a, p
+                FROM
+                    Entities\Clerks c
+                join
+                    c.clerkGroup g
+                join
+                    g.permissionAssignments a
+                join
+                    a.clerkGroupPermission p
+                where
+                    c.id = :clerkid';
+        $query = $em->createQuery($dql);
+        $query->setParameters(array(
+            'clerkid' => 1
+        ));
+        $clerks = $query->getResult();
+        echo "KahFsckingBoom";
+        print_r($clerks);
+    });
+
+
     // Send user to test Oauth2 Auth Flow
     $app->get('/examples/signin', function () use ($app) {
         $redirect_uri = 'http://localhost:81/api/api/examples/signinreturn';

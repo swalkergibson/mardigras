@@ -1,5 +1,5 @@
 <?php
-
+Namespace Entities;
 
 
 use Doctrine\ORM\Mapping as ORM;
@@ -28,6 +28,10 @@ class OrderSubmitMethods
      */
     private $title;
 
+    /**
+     * @OneToMany(targetEntity="Orders", mappedBy="orderSubmitMethod")
+    */
+    protected  $orders;
 
     /**
      * Get id
@@ -61,4 +65,28 @@ class OrderSubmitMethods
     {
         return $this->title;
     }
+
+    /**
+     * Set orders
+     *
+     * @param Entities\Orders $orders
+     * @return OrderSubmitMethods
+     */
+    public function setOrders(Orders $orders)
+    {
+        $this->orders = $orders;
+    
+        return $this;
+    }
+
+    /**
+     * Get orders
+     *
+     * @return Entities\Orders 
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+}
 }

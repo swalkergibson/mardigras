@@ -1,5 +1,5 @@
 <?php
-
+Namespace Entities;
 
 
 use Doctrine\ORM\Mapping as ORM;
@@ -28,6 +28,15 @@ class ClerkGroups
      */
     private $title;
 
+    /**
+     * @OneToMany(targetEntity="Clerks", mappedBy="clerkGroup")
+    */
+    protected  $clerksInGroup;
+
+    /**
+     * @OneToMany(targetEntity="ClerkGroupPermissionsAssign", mappedBy="clerkGroup")
+    */
+    protected  $permissionAssignments;
 
     /**
      * Get id
@@ -61,4 +70,51 @@ class ClerkGroups
     {
         return $this->title;
     }
+
+    /**
+     * Set clerksInGroup
+     *
+     * @param Entities\Clerks $clerksInGroup
+     * @return ClerkGroups
+     */
+    public function setClerksInGroup(Clerks $clerksInGroup)
+    {
+        $this->clerksInGroup = $clerksInGroup;
+    
+        return $this;
+    }
+
+    /**
+     * Get clerksInGroup
+     *
+     * @return Entities\Clerks 
+     */
+    public function getClerksInGroup()
+    {
+        return $this->clerksInGroup;
+    }
+
+    /**
+     * Set permissionAssignments
+     *
+     * @param Entities\ClerkGroupPermissionsAssign $permissionAssignments
+     * @return ClerkGroups
+     */
+    public function setPermissionAssignments(ClerkGroupPermissionsAssign $permissionAssignments)
+    {
+        $this->permissionAssignments = $permissionAssignments;
+    
+        return $this;
+    }
+
+    /**
+     * Get permissionAssignments
+     *
+     * @return Entities\ClerkGroupPermissionsAssign 
+     */
+    public function getPermissionAssignments()
+    {
+        return $this->permissionAssignments;
+    }
+
 }

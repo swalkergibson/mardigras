@@ -20,3 +20,6 @@
 	// REST
 	define('HOSTURL', 'http://localhost:81/');
 	define('RESTBASE','api/api/');
+
+	// PHP settings
+	date_default_timezone_set('MST');

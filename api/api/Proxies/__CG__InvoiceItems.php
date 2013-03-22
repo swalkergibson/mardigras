@@ -51,18 +51,6 @@ class InvoiceItems extends \InvoiceItems implements \Doctrine\ORM\Proxy\Proxy
         return parent::getId();
     }
 
-    public function setFlags($flags)
-    {
-        $this->__load();
-        return parent::setFlags($flags);
-    }
-
-    public function getFlags()
-    {
-        $this->__load();
-        return parent::getFlags();
-    }
-
     public function setPrice($price)
     {
         $this->__load();
@@ -99,16 +87,16 @@ class InvoiceItems extends \InvoiceItems implements \Doctrine\ORM\Proxy\Proxy
         return parent::getDiscount();
     }
 
-    public function setQty($qty)
+    public function setQuantity($quantity)
     {
         $this->__load();
-        return parent::setQty($qty);
+        return parent::setQuantity($quantity);
     }
 
-    public function getQty()
+    public function getQuantity()
     {
         $this->__load();
-        return parent::getQty();
+        return parent::getQuantity();
     }
 
     public function setTaxExempt($taxExempt)
@@ -121,18 +109,6 @@ class InvoiceItems extends \InvoiceItems implements \Doctrine\ORM\Proxy\Proxy
     {
         $this->__load();
         return parent::getTaxExempt();
-    }
-
-    public function setDateCreated($dateCreated)
-    {
-        $this->__load();
-        return parent::setDateCreated($dateCreated);
-    }
-
-    public function getDateCreated()
-    {
-        $this->__load();
-        return parent::getDateCreated();
     }
 
     public function setDateOut($dateOut)
@@ -210,7 +186,7 @@ class InvoiceItems extends \InvoiceItems implements \Doctrine\ORM\Proxy\Proxy
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'flags', 'price', 'rentalRate', 'discount', 'qty', 'taxExempt', 'dateCreated', 'dateOut', 'dateDue', 'dateReturned', 'daysCharged', 'invoice', 'inventory');
+        return array('__isInitialized__', 'id', 'price', 'rentalRate', 'discount', 'quantity', 'taxExempt', 'dateOut', 'dateDue', 'dateReturned', 'daysCharged', 'invoice', 'inventory');
     }
 
     public function __clone()

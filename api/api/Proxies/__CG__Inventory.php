@@ -75,16 +75,28 @@ class Inventory extends \Inventory implements \Doctrine\ORM\Proxy\Proxy
         return parent::getDescription();
     }
 
-    public function setQty($qty)
+    public function setShortDescription($shortDescription)
     {
         $this->__load();
-        return parent::setQty($qty);
+        return parent::setShortDescription($shortDescription);
     }
 
-    public function getQty()
+    public function getShortDescription()
     {
         $this->__load();
-        return parent::getQty();
+        return parent::getShortDescription();
+    }
+
+    public function setQuantity($quantity)
+    {
+        $this->__load();
+        return parent::setQuantity($quantity);
+    }
+
+    public function getQuantity()
+    {
+        $this->__load();
+        return parent::getQuantity();
     }
 
     public function setLastCost($lastCost)
@@ -135,16 +147,16 @@ class Inventory extends \Inventory implements \Doctrine\ORM\Proxy\Proxy
         return parent::getSizeId();
     }
 
-    public function setMinQty($minQty)
+    public function setMinQuantity($minQuantity)
     {
         $this->__load();
-        return parent::setMinQty($minQty);
+        return parent::setMinQuantity($minQuantity);
     }
 
-    public function getMinQty()
+    public function getMinQuantity()
     {
         $this->__load();
-        return parent::getMinQty();
+        return parent::getMinQuantity();
     }
 
     public function setDoNotOrder($doNotOrder)
@@ -198,7 +210,7 @@ class Inventory extends \Inventory implements \Doctrine\ORM\Proxy\Proxy
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'sku', 'description', 'qty', 'lastCost', 'price', 'vendorStock', 'sizeId', 'minQty', 'doNotOrder', 'online', 'vendor', 'category');
+        return array('__isInitialized__', 'id', 'sku', 'description', 'shortDescription', 'quantity', 'lastCost', 'price', 'vendorStock', 'sizeId', 'minQuantity', 'doNotOrder', 'online', 'vendor', 'category');
     }
 
     public function __clone()

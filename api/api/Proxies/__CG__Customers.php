@@ -51,18 +51,6 @@ class Customers extends \Customers implements \Doctrine\ORM\Proxy\Proxy
         return parent::getId();
     }
 
-    public function setCustomerRefId($customerRefId)
-    {
-        $this->__load();
-        return parent::setCustomerRefId($customerRefId);
-    }
-
-    public function getCustomerRefId()
-    {
-        $this->__load();
-        return parent::getCustomerRefId();
-    }
-
     public function setFirstName($firstName)
     {
         $this->__load();
@@ -157,6 +145,18 @@ class Customers extends \Customers implements \Doctrine\ORM\Proxy\Proxy
     {
         $this->__load();
         return parent::getPhone();
+    }
+
+    public function setFax($fax)
+    {
+        $this->__load();
+        return parent::setFax($fax);
+    }
+
+    public function getFax()
+    {
+        $this->__load();
+        return parent::getFax();
     }
 
     public function setEmail($email)
@@ -279,18 +279,6 @@ class Customers extends \Customers implements \Doctrine\ORM\Proxy\Proxy
         return parent::getLastUpdateDate();
     }
 
-    public function setCustomerType(\CustomerTypes $customerType)
-    {
-        $this->__load();
-        return parent::setCustomerType($customerType);
-    }
-
-    public function getCustomerType()
-    {
-        $this->__load();
-        return parent::getCustomerType();
-    }
-
     public function setGroup(\Groups $group = NULL)
     {
         $this->__load();
@@ -306,7 +294,7 @@ class Customers extends \Customers implements \Doctrine\ORM\Proxy\Proxy
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'customerRefId', 'firstName', 'lastName', 'address1', 'address2', 'city', 'state', 'zip', 'phone', 'email', 'notes', 'company', 'creditCard', 'creditCardExp', 'cvv', 'defaultTaxExempt', 'createdDate', 'lastActivityDate', 'lastUpdateDate', 'customerType', 'group');
+        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'address1', 'address2', 'city', 'state', 'zip', 'phone', 'fax', 'email', 'notes', 'company', 'creditCard', 'creditCardExp', 'cvv', 'defaultTaxExempt', 'createdDate', 'lastActivityDate', 'lastUpdateDate', 'group');
     }
 
     public function __clone()

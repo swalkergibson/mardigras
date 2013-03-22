@@ -41,7 +41,7 @@ $classLoader->register();
 $config = new \Doctrine\ORM\Configuration();
 
 // Proxies (3)
-$config->setProxyDir(__DIR__ . '/Proxies');
+$config->setProxyDir(__DIR__ . '\\..\\Proxies');
 $config->setProxyNamespace('Proxies');
 
 $config->setAutoGenerateProxyClasses((APPLICATION_ENV == "development"));
