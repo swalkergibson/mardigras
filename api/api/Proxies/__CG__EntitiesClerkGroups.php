@@ -63,22 +63,34 @@ class ClerkGroups extends \Entities\ClerkGroups implements \Doctrine\ORM\Proxy\P
         return parent::getTitle();
     }
 
-    public function setmyClerks(\Entities\ClerkGroups $clerksInGroup)
+    public function setClerksInGroup(\Entities\Clerks $clerksInGroup)
     {
         $this->__load();
-        return parent::setmyClerks($clerksInGroup);
+        return parent::setClerksInGroup($clerksInGroup);
     }
 
-    public function getmyClerks()
+    public function getClerksInGroup()
     {
         $this->__load();
-        return parent::getmyClerks();
+        return parent::getClerksInGroup();
+    }
+
+    public function setPermissionAssignments(\Entities\ClerkGroupPermissionsAssign $permissionAssignments)
+    {
+        $this->__load();
+        return parent::setPermissionAssignments($permissionAssignments);
+    }
+
+    public function getPermissionAssignments()
+    {
+        $this->__load();
+        return parent::getPermissionAssignments();
     }
 
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'title', 'clerksInGroup');
+        return array('__isInitialized__', 'id', 'title', 'clerksInGroup', 'permissionAssignments');
     }
 
     public function __clone()

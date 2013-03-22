@@ -37,9 +37,9 @@ class InventoryPieces
     private $inventory;
 
     /**
-     * @OneToMany(targetEntity="InvoiceItemPieces", mappedBy="inventoryPiece")
+     * @OneToMany(targetEntity="InvoiceItemsPieces", mappedBy="inventoryPiece")
     */
-    private  $invoiceItemPieces;
+    private  $invoiceItemsPieces;
 
     /**
      * Get id
@@ -98,12 +98,12 @@ class InventoryPieces
     }
 
     /**
-     * Set invoiceItemPieces
+     * Set invoiceItemsPieces
      *
      * @param Entities\InvoiceItemsPieces $invoiceItemPieces
      * @return InventoryPieces
      */
-    public function setInvoiceItems(InvoiceItemPieces $invoiceItemPieces)
+    public function setInvoiceItems(InvoiceItemsPieces $invoiceItemPieces)
     {
         $this->invoiceItemPieces = $invoiceItemPieces;
     
@@ -113,7 +113,7 @@ class InventoryPieces
     /**
      * Get invoiceItemPieces
      *
-     * @return Entities\InvoiceItemPieces
+     * @return Entities\InvoiceItemsPieces
      */
     public function getInvoiceItems()
     {

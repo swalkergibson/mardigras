@@ -75,10 +75,22 @@ class ClerkGroupPermissions extends \Entities\ClerkGroupPermissions implements \
         return parent::getName();
     }
 
+    public function setPermissionAssignments(\Entities\ClerkGroupPermissionsAssign $permissionAssignments)
+    {
+        $this->__load();
+        return parent::setPermissionAssignments($permissionAssignments);
+    }
+
+    public function getPermissionAssignments()
+    {
+        $this->__load();
+        return parent::getPermissionAssignments();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'slug', 'name');
+        return array('__isInitialized__', 'id', 'slug', 'name', 'permissionAssignments');
     }
 
     public function __clone()

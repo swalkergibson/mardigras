@@ -89,4 +89,3 @@ class OrderSubmitMethods
         return $this->orders;
     }
 }
-}

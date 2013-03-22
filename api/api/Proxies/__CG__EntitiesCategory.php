@@ -75,10 +75,22 @@ class Category extends \Entities\Category implements \Doctrine\ORM\Proxy\Proxy
         return parent::getSlug();
     }
 
+    public function setInventoryItems(\Entities\Inventory $inventoryItems)
+    {
+        $this->__load();
+        return parent::setInventoryItems($inventoryItems);
+    }
+
+    public function getInventoryItems()
+    {
+        $this->__load();
+        return parent::getInventoryItems();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'title', 'slug');
+        return array('__isInitialized__', 'id', 'title', 'slug', 'inventoryItems');
     }
 
     public function __clone()
