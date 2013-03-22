@@ -38,7 +38,7 @@ class ClerkGroupPermissions
     /**
      * @OneToMany(targetEntity="ClerkGroupPermissionsAssign", mappedBy="permissionAssignment")
     */
-    protected  $permissionAssignments;
+    private  $permissionAssignments;
 
     /**
      * Get id

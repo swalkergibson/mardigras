@@ -38,7 +38,7 @@ class OrderStatus
     /**
      * @OneToMany(targetEntity="Orders", mappedBy="orderStatus")
     */
-    protected  $orders;
+    private  $orders;
 
     /**
      * Get id

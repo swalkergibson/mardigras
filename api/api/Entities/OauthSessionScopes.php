@@ -22,22 +22,16 @@ class OauthSessionScopes
     private $id;
 
     /**
-     * @var \OauthSessions
-     *
-     * @ManyToOne(targetEntity="OauthSessions")
-     * @JoinColumns({
-     *   @JoinColumn(name="session_id", referencedColumnName="id")
-     * })
+     * @var Entities\OauthSessions
+     * @manyToOne(targetEntity="OauthSessions", inversedBy="SessionScopes")
+     * @JoinColumn(name="session_id", referencedColumnName="id")
      */
     private $session;
 
     /**
-     * @var \OauthScopes
-     *
-     * @ManyToOne(targetEntity="OauthScopes")
-     * @JoinColumns({
-     *   @JoinColumn(name="scope_id", referencedColumnName="id")
-     * })
+     * @var Entities\OauthScopes
+     * @manyToOne(targetEntity="OauthScopes", inversedBy="SessionScopes")
+     * @JoinColumn(name="scope_id", referencedColumnName="id")
      */
     private $scope;
 
@@ -55,10 +49,10 @@ class OauthSessionScopes
     /**
      * Set session
      *
-     * @param \OauthSessions $session
+     * @param Entities\OauthSessions $session
      * @return OauthSessionScopes
      */
-    public function setSession(\OauthSessions $session = null)
+    public function setSession(OauthSessions $session = null)
     {
         $this->session = $session;
     
@@ -68,7 +62,7 @@ class OauthSessionScopes
     /**
      * Get session
      *
-     * @return \OauthSessions 
+     * @return Entities\OauthSessions 
      */
     public function getSession()
     {
@@ -78,10 +72,10 @@ class OauthSessionScopes
     /**
      * Set scope
      *
-     * @param \OauthScopes $scope
+     * @param Entities\OauthScopes $scope
      * @return OauthSessionScopes
      */
-    public function setScope(\OauthScopes $scope = null)
+    public function setScope(OauthScopes $scope = null)
     {
         $this->scope = $scope;
     
@@ -91,7 +85,7 @@ class OauthSessionScopes
     /**
      * Get scope
      *
-     * @return \OauthScopes 
+     * @return Entities\OauthScopes 
      */
     public function getScope()
     {

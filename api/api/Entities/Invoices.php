@@ -71,48 +71,37 @@ class Invoices
     private $depositCardExp;
 
     /**
-     * @var \Clerks
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Clerks")
-     * @JoinColumns({
-     *   @JoinColumn(name="clerk_id", referencedColumnName="id")
-     * })
+     * @var Entities\Clerks
+     * @manyToOne(targetEntity="Clerks", inversedBy="invoices")
+     * @JoinColumn(name="clerk_id", referencedColumnName="id")
      */
     private $clerk;
 
     /**
-     * @var \InvoiceStatus
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="InvoiceStatus")
-     * @JoinColumns({
-     *   @JoinColumn(name="invoice_status_id", referencedColumnName="id")
-     * })
+     * @var Entities\InvoiceStatus
+     * @manyToOne(targetEntity="InvoiceStatus", inversedBy="invoices")
+     * @JoinColumn(name="invoice_status_id", referencedColumnName="id")
      */
     private $invoiceStatus;
 
     /**
-     * @var \DepositMethods
-     *
-     * @ManyToOne(targetEntity="DepositMethods")
-     * @JoinColumns({
-     *   @JoinColumn(name="deposit_method_id", referencedColumnName="id")
-     * })
+     * @var Entities\DepositMethods
+     * @manyToOne(targetEntity="DepositMethods", inversedBy="invoices")
+     * @JoinColumn(name="deposit_method_id", referencedColumnName="id")
      */
     private $depositMethod;
 
     /**
-     * @var \Customers
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Customers")
-     * @JoinColumns({
-     *   @JoinColumn(name="customer_id", referencedColumnName="id")
-     * })
+     * @var Entities\Customers
+     * @manyToOne(targetEntity="Customers", inversedBy="invoices")
+     * @JoinColumn(name="customer_id", referencedColumnName="id")
      */
     private $customer;
 
+    /**
+     * @OneToMany(targetEntity="InvoiceItems", mappedBy="invoice")
+    */
+    private  $invoiceItems;
 
     /**
      * Get id
@@ -288,10 +277,10 @@ class Invoices
     /**
      * Set clerk
      *
-     * @param \Clerks $clerk
+     * @param Entities\Clerks $clerk
      * @return Invoices
      */
-    public function setClerk(\Clerks $clerk)
+    public function setClerk(Clerks $clerk)
     {
         $this->clerk = $clerk;
     
@@ -301,7 +290,7 @@ class Invoices
     /**
      * Get clerk
      *
-     * @return \Clerks 
+     * @return Entities\Clerks 
      */
     public function getClerk()
     {
@@ -311,10 +300,10 @@ class Invoices
     /**
      * Set invoiceStatus
      *
-     * @param \InvoiceStatus $invoiceStatus
+     * @param Entities\InvoiceStatus $invoiceStatus
      * @return Invoices
      */
-    public function setInvoiceStatus(\InvoiceStatus $invoiceStatus)
+    public function setInvoiceStatus(InvoiceStatus $invoiceStatus)
     {
         $this->invoiceStatus = $invoiceStatus;
     
@@ -324,7 +313,7 @@ class Invoices
     /**
      * Get invoiceStatus
      *
-     * @return \InvoiceStatus 
+     * @return Entities\InvoiceStatus 
      */
     public function getInvoiceStatus()
     {
@@ -334,10 +323,10 @@ class Invoices
     /**
      * Set depositMethod
      *
-     * @param \DepositMethods $depositMethod
+     * @param Entities\DepositMethods $depositMethod
      * @return Invoices
      */
-    public function setDepositMethod(\DepositMethods $depositMethod = null)
+    public function setDepositMethod(DepositMethods $depositMethod = null)
     {
         $this->depositMethod = $depositMethod;
     
@@ -347,7 +336,7 @@ class Invoices
     /**
      * Get depositMethod
      *
-     * @return \DepositMethods 
+     * @return Entities\DepositMethods 
      */
     public function getDepositMethod()
     {
@@ -357,10 +346,10 @@ class Invoices
     /**
      * Set customer
      *
-     * @param \Customers $customer
+     * @param Entities\Customers $customer
      * @return Invoices
      */
-    public function setCustomer(\Customers $customer)
+    public function setCustomer(Customers $customer)
     {
         $this->customer = $customer;
     
@@ -370,10 +359,33 @@ class Invoices
     /**
      * Get customer
      *
-     * @return \Customers 
+     * @return Entities\Customers 
      */
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    /**
+     * Set invoiceItems
+     *
+     * @param Entities\InvoiceItems $invoiceItems
+     * @return Invoices
+     */
+    public function setInvoiceItems(InvoiceItems $invoiceItems)
+    {
+        $this->invoiceItems = $invoiceItems;
+    
+        return $this;
+    }
+
+    /**
+     * Get invoiceItems
+     *
+     * @return Entities\InvoiceItems
+     */
+    public function getInvoiceItems()
+    {
+        return $this->invoiceItems;
     }
 }

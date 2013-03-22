@@ -126,6 +126,15 @@ class Vendors
      */
     private $salesRepPhone;
 
+    /**
+     * @OneToMany(targetEntity="Orders", mappedBy="vendor")
+    */
+    private  $orders;
+
+    /**
+     * @OneToMany(targetEntity="Inventory", mappedBy="vendor")
+    */
+    private  $inventoryItems;
 
     /**
      * Get id
@@ -480,5 +489,51 @@ class Vendors
     public function getSalesRepPhone()
     {
         return $this->salesRepPhone;
+    }
+
+    /**
+     * Set orders
+     *
+     * @param Entities\Orders $orders
+     * @return Vendors
+     */
+    public function setOrders(Orders $orders)
+    {
+        $this->orders = $orders;
+    
+        return $this;
+    }
+
+    /**
+     * Get orders
+     *
+     * @return Entities\Orders 
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    /**
+     * Set inventoryItems
+     *
+     * @param Entities\Inventory $inventoryItems
+     * @return Vendors
+     */
+    public function setInventoryItems(Inventory $inventoryItems)
+    {
+        $this->inventoryItems = $inventoryItems;
+    
+        return $this;
+    }
+
+    /**
+     * Get inventoryItems
+     *
+     * @return Entities\Inventory
+     */
+    public function getInventoryItems()
+    {
+        return $this->inventoryItems;
     }
 }

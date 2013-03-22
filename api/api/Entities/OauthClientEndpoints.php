@@ -29,12 +29,9 @@ class OauthClientEndpoints
     private $redirectUri;
 
     /**
-     * @var \OauthClients
-     *
-     * @ManyToOne(targetEntity="OauthClients")
-     * @JoinColumns({
-     *   @JoinColumn(name="client_id", referencedColumnName="id")
-     * })
+     * @var Entities\OauthClients
+     * @manyToOne(targetEntity="OauthClients", inversedBy="clientEndpoints")
+     * @JoinColumn(name="client_id", referencedColumnName="id")
      */
     private $client;
 
@@ -75,10 +72,10 @@ class OauthClientEndpoints
     /**
      * Set client
      *
-     * @param \OauthClients $client
+     * @param Entities\OauthClients $client
      * @return OauthClientEndpoints
      */
-    public function setClient(\OauthClients $client = null)
+    public function setClient(OauthClients $client = null)
     {
         $this->client = $client;
     
@@ -88,7 +85,7 @@ class OauthClientEndpoints
     /**
      * Get client
      *
-     * @return \OauthClients 
+     * @return Entities\OauthClients 
      */
     public function getClient()
     {

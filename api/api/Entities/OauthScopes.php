@@ -42,6 +42,10 @@ class OauthScopes
      */
     private $description;
 
+    /**
+     * @OneToMany(targetEntity="OauthSessionScopes", mappedBy="scope")
+    */
+    private  $sessionScopes;
 
     /**
      * Get id
@@ -120,5 +124,28 @@ class OauthScopes
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set sessionScopes
+     *
+     * @param Entities\OauthSessionScopes $sessionScopes
+     * @return OauthScopes
+     */
+    public function setSessionScopes(OauthSessionScopes $sessionScopes)
+    {
+        $this->sessionScopes = $sessionScopes;
+    
+        return $this;
+    }
+
+    /**
+     * Get sessionScopes
+     *
+     * @return Entities\OauthSessionScopes
+     */
+    public function getSessionScopes()
+    {
+        return $this->sessionScopes;
     }
 }

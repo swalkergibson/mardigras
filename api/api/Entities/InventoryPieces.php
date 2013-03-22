@@ -28,17 +28,18 @@ class InventoryPieces
      */
     private $name;
 
+
     /**
-     * @var \Inventory
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Inventory")
-     * @JoinColumns({
-     *   @JoinColumn(name="inventory_id", referencedColumnName="id")
-     * })
+     * @var Entities\Inventory
+     * @manyToOne(targetEntity="Inventory", inversedBy="inventoryPieces")
+     * @JoinColumn(name="inventory_id", referencedColumnName="id")
      */
     private $inventory;
 
+    /**
+     * @OneToMany(targetEntity="InvoiceItemPieces", mappedBy="inventoryPiece")
+    */
+    private  $invoiceItemPieces;
 
     /**
      * Get id
@@ -76,10 +77,10 @@ class InventoryPieces
     /**
      * Set inventory
      *
-     * @param \Inventory $inventory
+     * @param Entities\Inventory $inventory
      * @return InventoryPieces
      */
-    public function setInventory(\Inventory $inventory)
+    public function setInventory(Inventory $inventory)
     {
         $this->inventory = $inventory;
     
@@ -89,10 +90,33 @@ class InventoryPieces
     /**
      * Get inventory
      *
-     * @return \Inventory 
+     * @return Entities\Inventory 
      */
     public function getInventory()
     {
         return $this->inventory;
+    }
+
+    /**
+     * Set invoiceItemPieces
+     *
+     * @param Entities\InvoiceItemsPieces $invoiceItemPieces
+     * @return InventoryPieces
+     */
+    public function setInvoiceItems(InvoiceItemPieces $invoiceItemPieces)
+    {
+        $this->invoiceItemPieces = $invoiceItemPieces;
+    
+        return $this;
+    }
+
+    /**
+     * Get invoiceItemPieces
+     *
+     * @return Entities\InvoiceItemPieces
+     */
+    public function getInvoiceItems()
+    {
+        return $this->invoiceItemPieces;
     }
 }

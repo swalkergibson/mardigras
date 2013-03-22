@@ -22,26 +22,18 @@ class InvoiceItemsPieces
     private $id;
 
     /**
-     * @var \InvoiceItems
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="InvoiceItems")
-     * @JoinColumns({
-     *   @JoinColumn(name="invoice_items_id", referencedColumnName="id")
-     * })
+     * @var Entities\InvoiceItems
+     * @manyToOne(targetEntity="InvoiceItems", inversedBy="invoiceItemPieces")
+     * @JoinColumn(name="invoice_items_id", referencedColumnName="id")
      */
-    private $invoiceItems;
+    private $invoiceItem;
 
     /**
-     * @var \InventoryPieces
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="InventoryPieces")
-     * @JoinColumns({
-     *   @JoinColumn(name="inventory_pieces_id", referencedColumnName="id")
-     * })
+     * @var Entities\InventoryPieces
+     * @manyToOne(targetEntity="InventoryPieces", inversedBy="invoiceItemPieces")
+     * @JoinColumn(name="inventory_pieces_id", referencedColumnName="id")
      */
-    private $inventoryPieces;
+    private $inventoryPiece;
 
 
     /**
@@ -55,48 +47,48 @@ class InvoiceItemsPieces
     }
 
     /**
-     * Set invoiceItems
+     * Set invoiceItem
      *
-     * @param \InvoiceItems $invoiceItems
+     * @param Entities\InvoiceItems $invoiceItem
      * @return InvoiceItemsPieces
      */
-    public function setInvoiceItems(\InvoiceItems $invoiceItems)
+    public function setInvoiceItem(InvoiceItems $invoiceItem)
     {
-        $this->invoiceItems = $invoiceItems;
+        $this->invoiceItem = $invoiceItem;
     
         return $this;
     }
 
     /**
-     * Get invoiceItems
+     * Get invoiceItem
      *
-     * @return \InvoiceItems 
+     * @return Entities\InvoiceItems 
      */
-    public function getInvoiceItems()
+    public function getInvoiceItem()
     {
-        return $this->invoiceItems;
+        return $this->invoiceItem;
     }
 
     /**
-     * Set inventoryPieces
+     * Set inventoryPiece
      *
-     * @param \InventoryPieces $inventoryPieces
+     * @param Entities\InventoryPieces $inventoryPiece
      * @return InvoiceItemsPieces
      */
-    public function setInventoryPieces(\InventoryPieces $inventoryPieces)
+    public function setInventoryPiece(InventoryPieces $inventoryPiece)
     {
-        $this->inventoryPieces = $inventoryPieces;
+        $this->inventoryPiece = $inventoryPiece;
     
         return $this;
     }
 
     /**
-     * Get inventoryPieces
+     * Get inventoryPiece
      *
-     * @return \InventoryPieces 
+     * @return Entities\InventoryPieces 
      */
-    public function getInventoryPieces()
+    public function getInventoryPiece()
     {
-        return $this->inventoryPieces;
+        return $this->inventoryPiece;
     }
 }

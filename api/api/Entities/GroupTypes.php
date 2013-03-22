@@ -28,6 +28,10 @@ class GroupTypes
      */
     private $name;
 
+    /**
+     * @OneToMany(targetEntity="Groups", mappedBy="groupType")
+    */
+    private  $groups;
 
     /**
      * Get id
@@ -60,5 +64,28 @@ class GroupTypes
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set groups
+     *
+     * @param Entities\Groups $groups
+     * @return GroupTypes
+     */
+    public function setGroups(Groups $groups)
+    {
+        $this->groups = $groups;
+    
+        return $this;
+    }
+
+    /**
+     * Get groups
+     *
+     * @return Entities\Groups
+     */
+    public function getGroups()
+    {
+        return $this->groups;
     }
 }

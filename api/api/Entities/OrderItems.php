@@ -50,24 +50,16 @@ class OrderItems
     private $price;
 
     /**
-     * @var \Orders
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Orders")
-     * @JoinColumns({
-     *   @JoinColumn(name="order_id", referencedColumnName="id")
-     * })
+     * @var Entities\Orders
+     * @manyToOne(targetEntity="Orders", inversedBy="orderItems")
+     * @JoinColumn(name="order_id", referencedColumnName="id")
      */
     private $order;
 
     /**
-     * @var \Inventory
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Inventory")
-     * @JoinColumns({
-     *   @JoinColumn(name="inventory_id", referencedColumnName="id")
-     * })
+     * @var Entities\Inventory
+     * @manyToOne(targetEntity="Inventory", inversedBy="orderItems")
+     * @JoinColumn(name="inventory_id", referencedColumnName="id")
      */
     private $inventory;
 
@@ -177,10 +169,10 @@ class OrderItems
     /**
      * Set order
      *
-     * @param \Orders $order
+     * @param Entities\Orders $order
      * @return OrderItems
      */
-    public function setOrder(\Orders $order)
+    public function setOrder(Orders $order)
     {
         $this->order = $order;
     
@@ -190,7 +182,7 @@ class OrderItems
     /**
      * Get order
      *
-     * @return \Orders 
+     * @return Entities\Orders 
      */
     public function getOrder()
     {
@@ -200,10 +192,10 @@ class OrderItems
     /**
      * Set inventory
      *
-     * @param \Inventory $inventory
+     * @param Entities\Inventory $inventory
      * @return OrderItems
      */
-    public function setInventory(\Inventory $inventory)
+    public function setInventory(Inventory $inventory)
     {
         $this->inventory = $inventory;
     
@@ -213,7 +205,7 @@ class OrderItems
     /**
      * Get inventory
      *
-     * @return \Inventory 
+     * @return Entities\Inventory 
      */
     public function getInventory()
     {

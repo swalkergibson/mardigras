@@ -98,6 +98,10 @@ class OauthSessions
      */
     private $lastUpdated;
 
+    /**
+     * @OneToMany(targetEntity="OauthSessionScopes", mappedBy="session")
+    */
+    private  $sessionScopes;
 
     /**
      * Get id
@@ -360,5 +364,28 @@ class OauthSessions
     public function getLastUpdated()
     {
         return $this->lastUpdated;
+    }
+
+    /**
+     * Set sessionScopes
+     *
+     * @param Entities\OauthSessionScopes $sessionScopes
+     * @return OauthSessions
+     */
+    public function setSessionScopes(OauthSessionScopes $sessionScopes)
+    {
+        $this->sessionScopes = $sessionScopes;
+    
+        return $this;
+    }
+
+    /**
+     * Get sessionScopes
+     *
+     * @return Entities\OauthSessionScopes
+     */
+    public function getSessionScopes()
+    {
+        return $this->sessionScopes;
     }
 }

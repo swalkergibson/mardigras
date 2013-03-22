@@ -28,6 +28,10 @@ class DepositMethods
      */
     private $title;
 
+    /**
+     * @OneToMany(targetEntity="Invoices", mappedBy="depositMethod")
+    */
+    private  $invoices;
 
     /**
      * Get id
@@ -60,5 +64,28 @@ class DepositMethods
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set invoices
+     *
+     * @param Entities\Invoices $invoices
+     * @return DepositMethods
+     */
+    public function setInvoices(Invoices $invoices)
+    {
+        $this->invoices = $invoices;
+    
+        return $this;
+    }
+
+    /**
+     * Get invoices
+     *
+     * @return Entities\Invoices
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
     }
 }

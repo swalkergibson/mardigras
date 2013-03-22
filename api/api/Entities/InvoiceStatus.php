@@ -35,6 +35,10 @@ class InvoiceStatus
      */
     private $closed;
 
+    /**
+     * @OneToMany(targetEntity="Invoices", mappedBy="invoiceStatus")
+    */
+    private  $invoices;
 
     /**
      * Get id
@@ -90,5 +94,28 @@ class InvoiceStatus
     public function getClosed()
     {
         return $this->closed;
+    }
+
+    /**
+     * Set invoices
+     *
+     * @param Entities\Invoices $invoices
+     * @return InvoiceStatus
+     */
+    public function setInvoices(Invoices $invoices)
+    {
+        $this->invoices = $invoices;
+    
+        return $this;
+    }
+
+    /**
+     * Get invoices
+     *
+     * @return Entities\Invoices
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
     }
 }

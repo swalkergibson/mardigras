@@ -31,12 +31,12 @@ class ClerkGroups
     /**
      * @OneToMany(targetEntity="Clerks", mappedBy="clerkGroup")
     */
-    protected  $clerksInGroup;
+    private  $clerksInGroup;
 
     /**
      * @OneToMany(targetEntity="ClerkGroupPermissionsAssign", mappedBy="clerkGroup")
     */
-    protected  $permissionAssignments;
+    private  $permissionAssignments;
 
     /**
      * Get id

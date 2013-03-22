@@ -155,15 +155,21 @@ class Customers
     private $lastUpdateDate;
 
     /**
-     * @var \Groups
-     *
-     * @ManyToOne(targetEntity="Groups")
-     * @JoinColumns({
-     *   @JoinColumn(name="group_id", referencedColumnName="id")
-     * })
+     * @var Entities\Groups
+     * @manyToOne(targetEntity="Groups", inversedBy="customers")
+     * @JoinColumn(name="group_id", referencedColumnName="id")
      */
     private $group;
 
+    /**
+     * @OneToMany(targetEntity="Invoices", mappedBy="customer")
+    */
+    private  $invoices;
+
+    /**
+     * @OneToMany(targetEntity="Groups", mappedBy="adminCustomer")
+    */
+    private  $adminGroups;
 
     /**
      * Get id
@@ -615,10 +621,10 @@ class Customers
     /**
      * Set group
      *
-     * @param \Groups $group
+     * @param Entities\Groups $group
      * @return Customers
      */
-    public function setGroup(\Groups $group = null)
+    public function setGroup(Groups $group = null)
     {
         $this->group = $group;
     
@@ -628,10 +634,56 @@ class Customers
     /**
      * Get group
      *
-     * @return \Groups 
+     * @return Entities\Groups 
      */
     public function getGroup()
     {
         return $this->group;
+    }
+
+    /**
+     * Set invoices
+     *
+     * @param Entities\Invoices $invoices
+     * @return Customers
+     */
+    public function setInvoices(Invoices $invoices)
+    {
+        $this->invoices = $invoices;
+    
+        return $this;
+    }
+
+    /**
+     * Get invoices
+     *
+     * @return Entities\Invoices
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
+    }
+
+    /**
+     * Set adminGroups
+     *
+     * @param Entities\Groups $adminGroups
+     * @return Customers
+     */
+    public function setAdminGroups(Groups $adminGroups)
+    {
+        $this->adminGroups = $adminGroups;
+    
+        return $this;
+    }
+
+    /**
+     * Get adminGroups
+     *
+     * @return Entities\Groups
+     */
+    public function getAdminGroups()
+    {
+        return $this->adminGroups;
     }
 }

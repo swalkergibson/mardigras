@@ -73,7 +73,13 @@ class Clerks
     /**
      * @OneToMany(targetEntity="Orders", mappedBy="clerk")
     */
-    protected  $orders;
+    private  $orders;
+
+    /**
+     * @OneToMany(targetEntity="Invoices", mappedBy="clerk")
+    */
+    private  $invoices;
+
 
     /**
      * Get id
@@ -267,5 +273,28 @@ class Clerks
     public function getOrders()
     {
         return $this->orders;
+    }
+
+    /**
+     * Set invoices
+     *
+     * @param Entities\Invoices $invoices
+     * @return Clerks
+     */
+    public function setInvoices(Invoices $invoices)
+    {
+        $this->invoices = $invoices;
+    
+        return $this;
+    }
+
+    /**
+     * Get invoices
+     *
+     * @return Entities\Invoices
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
     }
 }

@@ -31,7 +31,7 @@ class OrderSubmitMethods
     /**
      * @OneToMany(targetEntity="Orders", mappedBy="orderSubmitMethod")
     */
-    protected  $orders;
+    private  $orders;
 
     /**
      * Get id

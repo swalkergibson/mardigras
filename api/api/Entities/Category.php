@@ -35,6 +35,10 @@ class Category
      */
     private $slug;
 
+    /**
+     * @OneToMany(targetEntity="Inventory", mappedBy="category")
+    */
+    private  $inventoryItems;
 
     /**
      * Get id
@@ -90,5 +94,28 @@ class Category
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set inventoryItems
+     *
+     * @param Entities\Inventory $inventoryItems
+     * @return Category
+     */
+    public function setInventoryItems(Inventory $inventoryItems)
+    {
+        $this->inventoryItems = $inventoryItems;
+    
+        return $this;
+    }
+
+    /**
+     * Get inventoryItems
+     *
+     * @return Entities\Inventory
+     */
+    public function getInventoryItems()
+    {
+        return $this->inventoryItems;
     }
 }

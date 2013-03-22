@@ -85,27 +85,23 @@ class InvoiceItems
     private $daysCharged;
 
     /**
-     * @var \Invoices
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Invoices")
-     * @JoinColumns({
-     *   @JoinColumn(name="invoice_id", referencedColumnName="id")
-     * })
+     * @var Entities\Invoices
+     * @manyToOne(targetEntity="Invoices", inversedBy="invoiceItems")
+     * @JoinColumn(name="invoice_id", referencedColumnName="id")
      */
     private $invoice;
 
     /**
-     * @var \Inventory
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Inventory")
-     * @JoinColumns({
-     *   @JoinColumn(name="inventory_id", referencedColumnName="id")
-     * })
+     * @var Entities\Inventory
+     * @manyToOne(targetEntity="Inventory", inversedBy="invoiceItems")
+     * @JoinColumn(name="inventory_id", referencedColumnName="id")
      */
     private $inventory;
 
+    /**
+     * @OneToMany(targetEntity="InvoiceItemPieces", mappedBy="invoiceItem")
+    */
+    private  $invoiceItemPieces;
 
     /**
      * Get id
@@ -327,10 +323,10 @@ class InvoiceItems
     /**
      * Set invoice
      *
-     * @param \Invoices $invoice
+     * @param Entities\Invoices $invoice
      * @return InvoiceItems
      */
-    public function setInvoice(\Invoices $invoice)
+    public function setInvoice(Invoices $invoice)
     {
         $this->invoice = $invoice;
     
@@ -340,7 +336,7 @@ class InvoiceItems
     /**
      * Get invoice
      *
-     * @return \Invoices 
+     * @return Entities\Invoices 
      */
     public function getInvoice()
     {
@@ -350,10 +346,10 @@ class InvoiceItems
     /**
      * Set inventory
      *
-     * @param \Inventory $inventory
+     * @param Entities\Inventory $inventory
      * @return InvoiceItems
      */
-    public function setInventory(\Inventory $inventory)
+    public function setInventory(Inventory $inventory)
     {
         $this->inventory = $inventory;
     
@@ -363,10 +359,33 @@ class InvoiceItems
     /**
      * Get inventory
      *
-     * @return \Inventory 
+     * @return Entities\Inventory 
      */
     public function getInventory()
     {
         return $this->inventory;
+    }
+
+    /**
+     * Set invoiceItemPieces
+     *
+     * @param Entities\InvoiceItemsPieces $invoiceItemPieces
+     * @return InvoiceItems
+     */
+    public function setInvoiceItems(InvoiceItemPieces $invoiceItemPieces)
+    {
+        $this->invoiceItemPieces = $invoiceItemPieces;
+    
+        return $this;
+    }
+
+    /**
+     * Get invoiceItemPieces
+     *
+     * @return Entities\InvoiceItemPieces
+     */
+    public function getInvoiceItems()
+    {
+        return $this->invoiceItemPieces;
     }
 }

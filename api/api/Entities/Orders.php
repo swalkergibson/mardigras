@@ -99,13 +99,9 @@ class Orders
     private $orderSubmitMethod;
 
     /**
-     * @var \Vendors
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Vendors")
-     * @JoinColumns({
-     *   @JoinColumn(name="vendor_id", referencedColumnName="id")
-     * })
+     * @var Entities\Vendors
+     * @manyToOne(targetEntity="Vendors", inversedBy="orders")
+     * @JoinColumn(name="vendor_id", referencedColumnName="id")
      */
     private $vendor;
 
@@ -116,6 +112,10 @@ class Orders
      */
     private $clerk;
 
+    /**
+     * @OneToMany(targetEntity="OrderItems", mappedBy="order")
+    */
+    private  $orderItems;
 
     /**
      * Get id
@@ -383,10 +383,10 @@ class Orders
     /**
      * Set vendor
      *
-     * @param \Vendors $vendor
+     * @param Entities\Vendors $vendor
      * @return Orders
      */
-    public function setVendor(\Vendors $vendor)
+    public function setVendor(Vendors $vendor)
     {
         $this->vendor = $vendor;
     
@@ -396,7 +396,7 @@ class Orders
     /**
      * Get vendor
      *
-     * @return \Vendors 
+     * @return Entities\Vendors 
      */
     public function getVendor()
     {
@@ -424,5 +424,28 @@ class Orders
     public function getClerk()
     {
         return $this->clerk;
+    }
+
+    /**
+     * Set orderItems
+     *
+     * @param Entities\OrderItems $orderItems
+     * @return Orders
+     */
+    public function setOrderItems(OrderItems $orderItems)
+    {
+        $this->orderItems = $orderItems;
+    
+        return $this;
+    }
+
+    /**
+     * Get orderItems
+     *
+     * @return Entities\OrderItems
+     */
+    public function getOrderItems()
+    {
+        return $this->orderItems;
     }
 }

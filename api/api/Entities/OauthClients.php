@@ -42,6 +42,10 @@ class OauthClients
      */
     private $autoApprove;
 
+    /**
+     * @OneToMany(targetEntity="OauthClientEndpoints", mappedBy="client")
+    */
+    private  $clientEndpoints;
 
     /**
      * Get id
@@ -120,5 +124,28 @@ class OauthClients
     public function getAutoApprove()
     {
         return $this->autoApprove;
+    }
+
+    /**
+     * Set clientEndpoints
+     *
+     * @param Entities\OauthClientEndpoints $clientEndpoints
+     * @return OauthClients
+     */
+    public function setClientEndpoints(OauthClientEndpoints $clientEndpoints)
+    {
+        $this->clientEndpoints = $clientEndpoints;
+    
+        return $this;
+    }
+
+    /**
+     * Get clientEndpoints
+     *
+     * @return Entities\OauthClientEndpoints
+     */
+    public function getClientEndpoints()
+    {
+        return $this->clientEndpoints;
     }
 }

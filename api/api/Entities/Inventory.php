@@ -99,27 +99,28 @@ class Inventory
     private $online;
 
     /**
-     * @var \Vendors
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Vendors")
-     * @JoinColumns({
-     *   @JoinColumn(name="vendor_id", referencedColumnName="id")
-     * })
+     * @var Entities\Vendors
+     * @manyToOne(targetEntity="Vendors", inversedBy="inventoryItems")
+     * @JoinColumn(name="vendor_id", referencedColumnName="id")
      */
     private $vendor;
 
     /**
-     * @var \Category
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Category")
-     * @JoinColumns({
-     *   @JoinColumn(name="category_id", referencedColumnName="id")
-     * })
+     * @var Entities\Category
+     * @manyToOne(targetEntity="Category", inversedBy="inventoryItems")
+     * @JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
 
+    /**
+     * @OneToMany(targetEntity="OrderItems", mappedBy="inventory")
+    */
+    private  $orderItems;
+
+    /**
+     * @OneToMany(targetEntity="InventoryPieces", mappedBy="inventory")
+    */
+    private  $inventoryPieces;
 
     /**
      * Get id
@@ -387,10 +388,10 @@ class Inventory
     /**
      * Set vendor
      *
-     * @param \Vendors $vendor
+     * @param Entities\Vendors $vendor
      * @return Inventory
      */
-    public function setVendor(\Vendors $vendor)
+    public function setVendor(Vendors $vendor)
     {
         $this->vendor = $vendor;
     
@@ -400,7 +401,7 @@ class Inventory
     /**
      * Get vendor
      *
-     * @return \Vendors 
+     * @return Entities\Vendors 
      */
     public function getVendor()
     {
@@ -410,10 +411,10 @@ class Inventory
     /**
      * Set category
      *
-     * @param \Category $category
+     * @param Entities\Category $category
      * @return Inventory
      */
-    public function setCategory(\Category $category)
+    public function setCategory(Category $category)
     {
         $this->category = $category;
     
@@ -423,10 +424,79 @@ class Inventory
     /**
      * Get category
      *
-     * @return \Category 
+     * @return Entities\Category 
      */
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set orderItems
+     *
+     * @param Entities\OrderItems $orderItems
+     * @return Inventory
+     */
+    public function setOrderItems(OrderItems $orderItems)
+    {
+        $this->orderItems = $orderItems;
+    
+        return $this;
+    }
+
+    /**
+     * Get orderItems
+     *
+     * @return Entities\OrderItems
+     */
+    public function getOrderItems()
+    {
+        return $this->orderItems;
+    }
+
+    /**
+     * Set invoiceItems
+     *
+     * @param Entities\InvoiceItems $invoiceItems
+     * @return Inventory
+     */
+    public function setInvoiceItems(InvoiceItems $invoiceItems)
+    {
+        $this->invoiceItems = $invoiceItems;
+    
+        return $this;
+    }
+
+    /**
+     * Get invoiceItems
+     *
+     * @return Entities\InvoiceItems
+     */
+    public function getInvoiceItems()
+    {
+        return $this->invoiceItems;
+    }
+
+    /**
+     * Set inventoryPieces
+     *
+     * @param Entities\InventoryPieces $inventoryPieces
+     * @return Inventory
+     */
+    public function setInventoryPieces(InventoryPieces $inventoryPieces)
+    {
+        $this->inventoryPieces = $inventoryPieces;
+    
+        return $this;
+    }
+
+    /**
+     * Get inventoryPieces
+     *
+     * @return Entities\InventoryPieces
+     */
+    public function getInventoryPieces()
+    {
+        return $this->inventoryPieces;
     }
 }

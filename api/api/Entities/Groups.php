@@ -43,27 +43,23 @@ class Groups
     private $fax;
 
     /**
-     * @var \Customers
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="Customers")
-     * @JoinColumns({
-     *   @JoinColumn(name="admin_customer_id", referencedColumnName="id")
-     * })
+     * @var Entities\Customers
+     * @manyToOne(targetEntity="Customers", inversedBy="adminGroups")
+     * @JoinColumn(name="admin_customer_id", referencedColumnName="id")
      */
     private $adminCustomer;
 
     /**
-     * @var \GroupTypes
-     *
-     * @GeneratedValue(strategy="IDENTITY")
-     * @OneToOne(targetEntity="GroupTypes")
-     * @JoinColumns({
-     *   @JoinColumn(name="group_type_id", referencedColumnName="id")
-     * })
+     * @var Entities\GroupTypes
+     * @manyToOne(targetEntity="GroupTypes", inversedBy="groups")
+     * @JoinColumn(name="group_type_id", referencedColumnName="id")
      */
     private $groupType;
 
+    /**
+     * @OneToMany(targetEntity="Customers", mappedBy="group")
+    */
+    private  $customers;
 
     /**
      * Get id
@@ -147,10 +143,10 @@ class Groups
     /**
      * Set adminCustomer
      *
-     * @param \Customers $adminCustomer
+     * @param Entities\Customers $adminCustomer
      * @return Groups
      */
-    public function setAdminCustomer(\Customers $adminCustomer)
+    public function setAdminCustomer(Customers $adminCustomer)
     {
         $this->adminCustomer = $adminCustomer;
     
@@ -160,7 +156,7 @@ class Groups
     /**
      * Get adminCustomer
      *
-     * @return \Customers 
+     * @return Entities\Customers 
      */
     public function getAdminCustomer()
     {
@@ -170,10 +166,10 @@ class Groups
     /**
      * Set groupType
      *
-     * @param \GroupTypes $groupType
+     * @param Entities\GroupTypes $groupType
      * @return Groups
      */
-    public function setGroupType(\GroupTypes $groupType)
+    public function setGroupType(GroupTypes $groupType)
     {
         $this->groupType = $groupType;
     
@@ -183,10 +179,33 @@ class Groups
     /**
      * Get groupType
      *
-     * @return \GroupTypes 
+     * @return Entities\GroupTypes 
      */
     public function getGroupType()
     {
         return $this->groupType;
+    }
+
+    /**
+     * Set customers
+     *
+     * @param Entities\Customers $customers
+     * @return Groups
+     */
+    public function setCustomers(Customers $customers)
+    {
+        $this->customers = $customers;
+    
+        return $this;
+    }
+
+    /**
+     * Get customers
+     *
+     * @return Entities\Customers
+     */
+    public function getCustomers()
+    {
+        return $this->customers;
     }
 }
