@@ -69,6 +69,7 @@
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
+
         $curl_response = curl_exec($curl);
         curl_close($curl);
         $response = json_decode($curl_response);
@@ -83,7 +84,6 @@
     });
 
     $app->get('/examples/testclient', function () use ($app) {
-
         if (!isset($_SESSION['Examples']['oauth2']))
             $app->redirect('/'.RESTBASE.'examples');
         else

@@ -18,14 +18,14 @@ class OauthServer
 	// Slim object
 	public $app;
 
-	public function __construct($app)
+	public function __construct($app, $em)
 	{
 		$this->app = $app;
 		// Initiate the auth server with the models
-		$this->resource = new \OAuth2\ResourceServer(new \Classes\OAuth\SessionModel(), new \Classes\OAuth\ScopeModel());
+		$this->resource = new \OAuth2\ResourceServer(new \Classes\OAuth\SessionModel($em), new \Classes\OAuth\ScopeModel($em));
 
 		// Initiate the auth server with the models
-		$this->auth = new \OAuth2\AuthServer(new \Classes\OAuth\ClientModel(), new \Classes\OAuth\SessionModel(), new \Classes\OAuth\ScopeModel());
+		$this->auth = new \OAuth2\AuthServer(new \Classes\OAuth\ClientModel($em), new \Classes\OAuth\SessionModel($em), new \Classes\OAuth\ScopeModel($em));
 	}
 
 	public function responseJSON($app, $response = "")

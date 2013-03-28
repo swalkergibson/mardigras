@@ -3,122 +3,97 @@ namespace Classes\OAuth;
 
 class SessionModel implements \OAuth2\Storage\SessionInterface {
 
-    private $db;
+    private $em;
 
-    public function __construct()
+    public function __construct($em)
     {
-        $this->db = new \Classes\OAuth\DB();
+        $this->em = $em;
     }
 
     public function createSession($clientId, $redirectUri, $type = 'user', $typeId = null, $authCode = null, $accessToken = null, $refreshToken = null, $accessTokenExpire = null, $stage = 'requested')
     {
-        $this->db->query('
-            INSERT INTO oauth_sessions (
-                client_id,
-                redirect_uri,
-                owner_type,
-                owner_id,
-                auth_code,
-                access_token,
-                refresh_token,
-                access_token_expires,
-                stage,
-                first_requested,
-                last_updated
-            )
-            VALUES (
-                :clientId,
-                :redirectUri,
-                :type,
-                :typeId,
-                :authCode,
-                :accessToken,
-                :refreshToken,
-                :accessTokenExpire,
-                :stage,
-                UNIX_TIMESTAMP(NOW()),
-                UNIX_TIMESTAMP(NOW())
-            )', array(
-            ':clientId' =>  $clientId,
-            ':redirectUri'  =>  $redirectUri,
-            ':type' =>  $type,
-            ':typeId'   =>  $typeId,
-            ':authCode' =>  $authCode,
-            ':accessToken'  =>  $accessToken,
-            ':refreshToken' =>  $refreshToken,
-            ':accessTokenExpire'    =>  $accessTokenExpire,
-            ':stage'    =>  $stage
-        ));
+        $newSession = new \Entities\OauthSessions;
+        $newSession->setClientId($clientId);
+        $newSession->setRedirectUri($redirectUri);
+        $newSession->setOwnerType($type);
+        $newSession->setOwnerId($typeId);
+        $newSession->setAuthCode($authCode);
+        $newSession->setAccessToken($accessToken);
+        $newSession->setRefreshToken($refreshToken);
+        $newSession->setAccessTokenExpires($accessTokenExpire);
+        $newSession->setStage($stage);
+        $newSession->setFirstRequested(time());
+        $newSession->setLastUpdated(time());
 
-        return $this->db->getInsertId();
+        $this->em->persist($newSession);
+        $this->em->flush();
+
+        return $newSession->getId();
     }
 
     public function updateSession($sessionId, $authCode = null, $accessToken = null, $refreshToken = null, $accessTokenExpire = null, $stage = 'requested')
     {
-        $this->db->query('
-            UPDATE oauth_sessions SET
-                auth_code = :authCode,
-                access_token = :accessToken,
-                refresh_token = :refreshToken,
-                access_token_expires = :accessTokenExpire,
-                stage = :stage,
-                last_updated = UNIX_TIMESTAMP(NOW())
-            WHERE id = :sessionId',
-        array(
-            ':authCode' =>  $authCode,
-            ':accessToken'  =>  $accessToken,
-            ':refreshToken' =>  $refreshToken,
-            ':accessTokenExpire'    =>  $accessTokenExpire,
-            ':stage'    =>  $stage,
-            ':sessionId'    =>  $sessionId
-        ));
+        $session = $this->em->find('Entities\OauthSessions',$sessionId);
+        $session->setAuthCode($authCode);
+        $session->setAccessToken($accessToken);
+        $session->setRefreshToken($refreshToken);
+        $session->setAccessTokenExpires($accessTokenExpire);
+        $session->setStage($stage);
+
+        $this->em->persist($session);
+        $this->em->flush();
     }
 
     public function deleteSession($clientId, $type, $typeId)
     {
-        $this->db->query('
-                DELETE FROM oauth_sessions WHERE
-                client_id = :clientId AND
-                owner_type = :type AND
-                owner_id = :typeId',
-            array(
+        $query = $this->em->createQuery('DELETE Entities\OauthSessions s where s.clientId = :clientId and s.ownerType = :type and s.ownerId = :typeId');
+        $query->setParameters(array(
                 ':clientId' =>  $clientId,
                 ':type'  =>  $type,
                 ':typeId' =>  $typeId
             ));
+        $query->execute();
     }
 
     public function validateAuthCode($clientId, $redirectUri, $authCode)
     {
-        $result = $this->db->query('
-                SELECT * FROM oauth_sessions WHERE
-                    client_id = :clientId AND
-                    redirect_uri = :redirectUri AND
-                    auth_code = :authCode',
-            array(
-                ':clientId' =>  $clientId,
-                ':redirectUri'  =>  $redirectUri,
-                ':authCode' =>  $authCode
-            ));
-
-        while ($row = $result->fetch())
+        $dql = 'SELECT s from Entities\OauthSessions s where s.clientId = :clientId and s.redirectUri = :redirectUri
+            and s.authCode = :authCode';
+        $query = $this->em->createQuery($dql);
+        $query->setParameters(array ('clientId' => $clientId, 'redirectUri' => $redirectUri, 'authCode' => $authCode));
+        $session = $query->getResult();
+        if ($session)
         {
-            return (array) $row;
+            return array (
+                'id' => $session[0]->getId(),
+                'client_id' => $session[0]->getClientId(),
+                'redirect_uri' => $session[0]->getRedirectUri(),
+                'owner_type' => $session[0]->getOwnerType(),
+                'owner_id' => $session[0]->getOwnerId(),
+                'auth_code' => $session[0]->getAuthCode(),
+                'access_token' => $session[0]->getAccessToken(),
+                'refresh_token' => $session[0]->getRefreshToken(),
+                'access_token_expires' => $session[0]->getAccessTokenExpires(),
+                'stage' => $session[0]->getStage(),
+                'first_requested' => $session[0]->getFirstRequested(),
+                'last_updated' => $session[0]->getLastUpdated()
+            );
         }
-
-        return false;
+        else return false;
     }
 
     public function validateAccessToken($accessToken)
     {
-        $result = $this->db->query('SELECT id, owner_id, owner_type FROM oauth_sessions WHERE access_token = :accessToken', array(':accessToken' => $accessToken));
-        $row = $result->fetch();
+        $dql = 'select s from Entities\OauthSessions where accessToken = :accessToken';
+        $query = $this->em->createQuery($dql);
+        $query->setParameters(array(':accessToken' => $accessToken));
+        $session = $query->getResult();
 
-        if ($row) {
+        if ($session) {
             return array(
-                'id'    =>  $row->id,
-                'owner_type' =>  $row->owner_type,
-                'owner_id'  =>  $row->owner_id
+                'id'    =>  $session[0]->getId(),
+                'owner_type' =>  $session[0]->getOwnerType(),
+                'owner_id'  =>  $session[0]->getOwnerId()
             );
         } else {
             return false;
@@ -142,22 +117,32 @@ class SessionModel implements \OAuth2\Storage\SessionInterface {
 
     public function associateScope($sessionId, $scopeId)
     {
-        $this->db->query('INSERT INTO oauth_session_scopes (session_id, scope_id) VALUE (:sessionId, :scopeId)', array(
-            ':sessionId'    =>  $sessionId,
-            ':scopeId'  =>  $scopeId
-        ));
+        $session = $this->em->find('Entities\OauthSessions',$sessionId);
+        $scope = $this->em->find('Entities\OauthScopes', $scopeId);
+
+        // Add scope to session
+        $newSession = new \Entities\OauthSessionScopes;
+        $newSession->setSession($session);
+        $newSession->setScope($scope);
+
+        $this->em->persist($newSession);
+        $this->em->flush();
     }
 
-    public function getScopes($accessToken)
+    public function getScopes($sessionId)
     {
-        $result = $this->db->query('SELECT oauth_scopes.scope, oauth_scopes.name, oauth_scopes.description FROM oauth_session_scopes JOIN oauth_scopes ON oauth_session_scopes.scope_id = oauth_scopes.id WHERE session_id = :id', array(':id' => $sessionId));
+        // Get scopes available for this session
+        $dql = 'SELECT s, ss from Entities\OauthScopes s join s.sessionScopes ss where ss.sessionId = :sessionid';
+        $query = $this->em.createQuery($dql);
+        $query->setParameters(array (
+                'sessionid' => $sessionId
+            ));
+        $result = $query->getResults();
 
+        // Pack into an array
         $scopes = array();
-
-        while ($row = $result->fetch()) {
-            $scopes[] = $row->scope;
-        }
-
+        foreach ($result as $scope)
+            $scopes[] = $scope->getScope();
         return $scopes;
     }
 }

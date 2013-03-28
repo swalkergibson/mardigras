@@ -2,11 +2,11 @@
 namespace Classes\OAuth;
 
 class ClientModel implements \OAuth2\Storage\ClientInterface {
-    private $db;
+    private $em;
 
-	public function __construct()
+	public function __construct($em)
     {
-        $this->db = new DB();
+        $this->em = $em;
     }
 
 	public function getClient($clientId = null, $clientSecret = null, $redirectUri = null)
@@ -14,32 +14,35 @@ class ClientModel implements \OAuth2\Storage\ClientInterface {
 		if(empty($clientId))
 			return false;
 
-		$result = $this->db->query('
-			SELECT
-				c.id,
-				c.secret,
-				c.name,
-				e.redirect_uri
-			FROM
-				oauth_clients c
-			JOIN
-				oauth_client_endpoints e ON c.id = e.client_id
-			where
-				c.id = :clientid
-				and e.redirect_uri = :redirectUri', array(
-			':clientid' => $clientId,
-			':redirectUri' => $redirectUri));
-		$row = $result->fetch();
+		$dql = 'SELECT
+                    c, e
+                FROM
+                    Entities\OauthClients c
+                join
+                    c.clientEndpoints e
+                where
+                    c.id = :clientid
+                	and e.redirectUri = :redirecturi';
 
-		if ($row) {
+        $query = $this->em->createQuery($dql);
+
+        $query->setParameters(array(
+            'clientid' => $clientId,
+            'redirecturi' => $redirectUri
+        ));
+
+        $query->setMaxResults(1);
+        $client = $query->getResult();
+
+        $endpoints = $client[0]->GetClientEndpoints();
+		if ($client) {
 			return array(
-				'client_id' => $row->id,
-				'client secret' =>  $row->secret,
-				'redirect_uri' =>  $row->redirect_uri,
-				'name' =>  $row->name);
+				'client_id' => $client[0]->getId(),
+				'client secret' =>  $client[0]->getSecret(),
+				'redirect_uri' =>  $endpoints[0]->getRedirectUri(),
+				'name' =>  $client[0]->getName());
 		} else {
 			return false;
 		}
 	}
-
 }

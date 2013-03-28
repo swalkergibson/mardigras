@@ -3,24 +3,30 @@ namespace Classes\OAuth;
 
 class ScopeModel implements \OAuth2\Storage\ScopeInterface {
 
-	private $db;
+	private $em;
 
-    public function __construct()
+    public function __construct($em)
     {
-        $this->db = new DB();
+        $this->em = $em;
     }
 
 	public function getScope($scope)
 	{
-		$result = $this->db->query('SELECT * FROM oauth_scopes WHERE scope = :scope', array(':scope' => $scope));
-		$row = $result->fetch();
+		$dql = 'select s from Entities\OauthScopes s where s.scope = :scope';
+		$query = $this->em->createQuery($dql);
+		$query->setMaxResults(1);
+		$query->setParameters(array(
+			'scope' => $scope
+			));
+		$result = $query->getResult();
  
-		if ($row) {
+		if ($result) {
+			$row = array_shift($result);
 			return array(
-				'id'	=>	$row->id,
-				'scope'	=>	$row->scope,
-				'name'	=>	$row->name,
-				'description'	=>	$row->description
+				'id'	=>	$row->getId(),
+				'scope'	=>	$row->getScope(),
+				'name'	=>	$row->getName(),
+				'description'	=>	$row->getDescription()
 			);
 		} else {
 			return false;
