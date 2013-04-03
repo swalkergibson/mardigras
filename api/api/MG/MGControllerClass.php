@@ -23,9 +23,9 @@ class MGControllerClass
 	// Throw an exception
     static protected function throwException($error_slug = 'undefined_error', $insert_txt = null)
 	{
-		$errormsg = $exceptionMessages[$error_slug];
+		$errormsg = self::$exceptionMessages[$error_slug];
 
-		$msgtxt = sprintf(self::$exceptionMessages[$errormsg[1]], $insert_txt);
-		throw new Exception\ClientException($msgtxt, $errormsg[0]);
+		$msgtxt = sprintf($errormsg[1], $insert_txt);
+		throw new \OAuth2\Exception\ClientException($msgtxt, $errormsg[0]);
 	}
 }

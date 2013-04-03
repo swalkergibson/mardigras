@@ -7,7 +7,7 @@ class ClerkGroups extends \MG\MGControllerClass
 	{
 		$clerkGroup = $this->em->find('Entities\ClerkGroups',$clerkGroupId);
 		if (!$clerkGroup)
-			self::throwException(not_found, 'ClerkGroup');
+			self::throwException('not_found', 'ClerkGroup');
 		else
 			return $clerkGroup;
 	}

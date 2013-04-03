@@ -64,6 +64,13 @@ class Clerks
     private $dateLastLogin;
 
     /**
+     * @var integer
+     *
+     * @Column(name="deleted", type="integer", nullable=false)
+     */
+    private $deleted;
+
+    /**
      * @var Entities\ClerkGroups
      * @manyToOne(targetEntity="ClerkGroups", inversedBy="clerksInGroup")
      * @JoinColumn(name="clerk_group_id", referencedColumnName="id")
@@ -230,6 +237,29 @@ class Clerks
     }
 
     /**
+     * Set deleted
+     *
+     * @param integer $deleted
+     * @return Clerks
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+    
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return integer 
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
      * Set clerkGroup
      *
      * @param Entities\ClerkGroups $clerkGroup
@@ -296,5 +326,10 @@ class Clerks
     public function getInvoices()
     {
         return $this->invoices;
+    }
+
+    public function getJsonString()
+    {
+        
     }
 }
