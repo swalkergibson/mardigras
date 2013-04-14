@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="oauth_clients")
  * @Entity
  */
-class OauthClients
+class OauthClients extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var string
@@ -19,33 +19,33 @@ class OauthClients
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="secret", type="string", length=40, nullable=false)
      */
-    private $secret;
+    protected $secret;
 
     /**
      * @var string
      *
      * @Column(name="name", type="string", length=255, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var boolean
      *
      * @Column(name="auto_approve", type="boolean", nullable=false)
      */
-    private $autoApprove;
+    protected $autoApprove;
 
     /**
      * @OneToMany(targetEntity="OauthClientEndpoints", mappedBy="client")
     */
-    private  $clientEndpoints;
+    protected  $clientEndpoints;
 
     /**
      * Get id

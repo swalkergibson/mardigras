@@ -19,103 +19,103 @@ class Orders extends \MardiGras\Lib\MyDoctrineEntity
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \DateTime
      *
      * @Column(name="order_date", type="datetime", nullable=true)
      */
-    private $orderDate;
+    protected $orderDate;
 
     /**
      * @var \DateTime
      *
      * @Column(name="last_update_date", type="datetime", nullable=true)
      */
-    private $lastUpdateDate;
+    protected $lastUpdateDate;
 
     /**
      * @var string
      *
      * @Column(name="order_key", type="string", length=180, nullable=true)
      */
-    private $orderKey;
+    protected $orderKey;
 
     /**
      * @var \DateTime
      *
      * @Column(name="cancel_date", type="datetime", nullable=true)
      */
-    private $cancelDate;
+    protected $cancelDate;
 
     /**
      * @var \DateTime
      *
      * @Column(name="ship_date", type="datetime", nullable=true)
      */
-    private $shipDate;
+    protected $shipDate;
 
     /**
      * @var string
      *
      * @Column(name="order_discount", type="string", length=50, nullable=true)
      */
-    private $orderDiscount;
+    protected $orderDiscount;
 
     /**
      * @var string
      *
      * @Column(name="payment_terms", type="string", length=50, nullable=true)
      */
-    private $paymentTerms;
+    protected $paymentTerms;
 
     /**
      * @var \DateTime
      *
      * @Column(name="delivery_date", type="datetime", nullable=true)
      */
-    private $deliveryDate;
+    protected $deliveryDate;
 
     /**
      * @var \DateTime
      *
      * @Column(name="submit_date", type="datetime", nullable=true)
      */
-    private $submitDate;
+    protected $submitDate;
 
     /**
      * @var Entities\OrderStatus
      * @manyToOne(targetEntity="OrderStatus", inversedBy="orders")
      * @JoinColumn(name="order_status_id", referencedColumnName="id")
      */
-    private $orderStatus;
+    protected $orderStatus;
 
     /**
      * @var Entities\OrderSubmitMethods
      * @manyToOne(targetEntity="OrderSubmitMethods", inversedBy="orders")
      * @JoinColumn(name="order_submit_method_id", referencedColumnName="id")
      */
-    private $orderSubmitMethod;
+    protected $orderSubmitMethod;
 
     /**
      * @var Entities\Vendors
      * @manyToOne(targetEntity="Vendors", inversedBy="orders")
      * @JoinColumn(name="vendor_id", referencedColumnName="id")
      */
-    private $vendor;
+    protected $vendor;
 
     /**
      * @var Entities\Clerks
      * @manyToOne(targetEntity="Clerks", inversedBy="orders")
      * @JoinColumn(name="clerk_id", referencedColumnName="id")
      */
-    private $clerk;
+    protected $clerk;
 
     /**
      * @OneToMany(targetEntity="OrderItems", mappedBy="order")
     */
-    private  $orderItems;
+    protected  $orderItems;
 
     /**
      * Get id

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="clerk_group_permissions_assign")
  * @Entity
  */
-class ClerkGroupPermissionsAssign
+class ClerkGroupPermissionsAssign extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,35 +19,35 @@ class ClerkGroupPermissionsAssign
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @Column(name="allow", type="integer", nullable=true)
      */
-    private $allow;
+    protected $allow;
 
     /**
      * @var integer
      *
      * @Column(name="deny", type="integer", nullable=true)
      */
-    private $deny;
+    protected $deny;
 
     /**
      * @var Entities\ClerkGroups
      * @manyToOne(targetEntity="ClerkGroups", inversedBy="permissionAssignments")
      * @JoinColumn(name="clerk_group_id", referencedColumnName="id")
      */
-    private $clerkGroup;
+    protected $clerkGroup;
 
     /**
      * @var Entities\ClerkGroupPermissions
      * @manyToOne(targetEntity="ClerkGroupPermissions", inversedBy="permissionAssignments")
      * @JoinColumn(name="clerk_group_permissions_id", referencedColumnName="id")
      */
-    private $clerkGroupPermission;
+    protected $clerkGroupPermission;
 
 
     /**

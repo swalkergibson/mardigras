@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="invoice_items")
  * @Entity
  */
-class InvoiceItems
+class InvoiceItems extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,89 +19,89 @@ class InvoiceItems
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var float
      *
      * @Column(name="price", type="decimal", nullable=true)
      */
-    private $price;
+    protected $price;
 
     /**
      * @var float
      *
      * @Column(name="rental_rate", type="decimal", nullable=true)
      */
-    private $rentalRate;
+    protected $rentalRate;
 
     /**
      * @var float
      *
      * @Column(name="discount", type="decimal", nullable=true)
      */
-    private $discount;
+    protected $discount;
 
     /**
      * @var integer
      *
      * @Column(name="quantity", type="integer", nullable=true)
      */
-    private $quantity;
+    protected $quantity;
 
     /**
      * @var integer
      *
      * @Column(name="tax_exempt", type="integer", nullable=true)
      */
-    private $taxExempt;
+    protected $taxExempt;
 
     /**
      * @var \DateTime
      *
      * @Column(name="date_out", type="datetime", nullable=true)
      */
-    private $dateOut;
+    protected $dateOut;
 
     /**
      * @var \DateTime
      *
      * @Column(name="date_due", type="datetime", nullable=true)
      */
-    private $dateDue;
+    protected $dateDue;
 
     /**
      * @var \DateTime
      *
      * @Column(name="date_returned", type="datetime", nullable=true)
      */
-    private $dateReturned;
+    protected $dateReturned;
 
     /**
      * @var float
      *
      * @Column(name="days_charged", type="decimal", nullable=true)
      */
-    private $daysCharged;
+    protected $daysCharged;
 
     /**
      * @var Entities\Invoices
      * @manyToOne(targetEntity="Invoices", inversedBy="invoiceItems")
      * @JoinColumn(name="invoice_id", referencedColumnName="id")
      */
-    private $invoice;
+    protected $invoice;
 
     /**
      * @var Entities\Inventory
      * @manyToOne(targetEntity="Inventory", inversedBy="invoiceItems")
      * @JoinColumn(name="inventory_id", referencedColumnName="id")
      */
-    private $inventory;
+    protected $inventory;
 
     /**
      * @OneToMany(targetEntity="InvoiceItemsPieces", mappedBy="invoiceItem")
     */
-    private  $invoiceItemPieces;
+    protected  $invoiceItemPieces;
 
     /**
      * Get id

@@ -40,14 +40,14 @@ class Clerks extends \MardiGras\Lib\MyDoctrineEntity
      *
      * @Column(name="password_hash", type="string", length=128, nullable=false)
      */
-    private $passwordHash;
+    protected $passwordHash;
 
     /**
      * @var string
      *
      * @Column(name="password_salt", type="string", length=16, nullable=false)
      */
-    private $passwordSalt;
+    protected $passwordSalt;
 
     /**
      * @var \DateTime

@@ -1,7 +1,7 @@
 <?php
 Namespace MardiGras\Controllers;
 
-class ClerkGroups extends \MardiGras\Lib\MGControllerClass
+class OrderStatus extends \MardiGras\Lib\MGControllerClass
 {
 	public function index()
 	{

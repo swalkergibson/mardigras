@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="category")
  * @Entity
  */
-class Category
+class Category extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,26 +19,26 @@ class Category
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="title", type="string", length=25, nullable=true)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
      *
      * @Column(name="slug", type="string", length=7, nullable=true)
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @OneToMany(targetEntity="Inventory", mappedBy="category")
     */
-    private  $inventoryItems;
+    protected  $inventoryItems;
 
     /**
      * Get id

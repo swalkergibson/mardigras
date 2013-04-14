@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="order_submit_methods")
  * @Entity
  */
-class OrderSubmitMethods
+class OrderSubmitMethods extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,19 +19,19 @@ class OrderSubmitMethods
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="title", type="string", length=50, nullable=false)
      */
-    private $title;
+    protected $title;
 
     /**
      * @OneToMany(targetEntity="Orders", mappedBy="orderSubmitMethod")
     */
-    private  $orders;
+    protected  $orders;
 
     /**
      * Get id

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="vendors")
  * @Entity
  */
-class Vendors
+class Vendors extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,122 +19,122 @@ class Vendors
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="code", type="string", length=50, nullable=true)
      */
-    private $code;
+    protected $code;
 
     /**
      * @var string
      *
      * @Column(name="name", type="string", length=100, nullable=true)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @Column(name="contact", type="string", length=20, nullable=true)
      */
-    private $contact;
+    protected $contact;
 
     /**
      * @var string
      *
      * @Column(name="address1", type="string", length=30, nullable=true)
      */
-    private $address1;
+    protected $address1;
 
     /**
      * @var string
      *
      * @Column(name="address2", type="string", length=30, nullable=true)
      */
-    private $address2;
+    protected $address2;
 
     /**
      * @var string
      *
      * @Column(name="city_state", type="string", length=120, nullable=true)
      */
-    private $cityState;
+    protected $cityState;
 
     /**
      * @var string
      *
      * @Column(name="city", type="string", length=100, nullable=true)
      */
-    private $city;
+    protected $city;
 
     /**
      * @var string
      *
      * @Column(name="state", type="string", length=100, nullable=true)
      */
-    private $state;
+    protected $state;
 
     /**
      * @var string
      *
      * @Column(name="zip", type="string", length=10, nullable=true)
      */
-    private $zip;
+    protected $zip;
 
     /**
      * @var string
      *
      * @Column(name="phone", type="string", length=14, nullable=true)
      */
-    private $phone;
+    protected $phone;
 
     /**
      * @var string
      *
      * @Column(name="fax", type="string", length=14, nullable=true)
      */
-    private $fax;
+    protected $fax;
 
     /**
      * @var string
      *
      * @Column(name="email", type="string", length=100, nullable=true)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      *
      * @Column(name="mg_account_num", type="string", length=250, nullable=true)
      */
-    private $mgAccountNum;
+    protected $mgAccountNum;
 
     /**
      * @var string
      *
      * @Column(name="sales_rep_name", type="string", length=250, nullable=true)
      */
-    private $salesRepName;
+    protected $salesRepName;
 
     /**
      * @var string
      *
      * @Column(name="sales_rep_phone", type="string", length=250, nullable=true)
      */
-    private $salesRepPhone;
+    protected $salesRepPhone;
 
     /**
      * @OneToMany(targetEntity="Orders", mappedBy="vendor")
     */
-    private  $orders;
+    protected  $orders;
 
     /**
      * @OneToMany(targetEntity="Inventory", mappedBy="vendor")
     */
-    private  $inventoryItems;
+    protected  $inventoryItems;
 
     /**
      * Get id

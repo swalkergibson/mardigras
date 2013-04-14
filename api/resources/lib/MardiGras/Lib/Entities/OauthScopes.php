@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="oauth_scopes")
  * @Entity
  */
-class OauthScopes
+class OauthScopes extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,33 +19,33 @@ class OauthScopes
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="scope", type="string", length=255, nullable=false)
      */
-    private $scope;
+    protected $scope;
 
     /**
      * @var string
      *
      * @Column(name="name", type="string", length=255, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @Column(name="description", type="string", length=255, nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @OneToMany(targetEntity="OauthSessionScopes", mappedBy="scope")
     */
-    private  $sessionScopes;
+    protected  $sessionScopes;
 
     /**
      * Get id

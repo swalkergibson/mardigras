@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="groups")
  * @Entity
  */
-class Groups
+class Groups extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,47 +19,47 @@ class Groups
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="name", type="string", length=250, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @Column(name="phone", type="string", length=12, nullable=true)
      */
-    private $phone;
+    protected $phone;
 
     /**
      * @var string
      *
      * @Column(name="fax", type="string", length=12, nullable=true)
      */
-    private $fax;
+    protected $fax;
 
     /**
      * @var Entities\Customers
      * @manyToOne(targetEntity="Customers", inversedBy="adminGroups")
      * @JoinColumn(name="admin_customer_id", referencedColumnName="id")
      */
-    private $adminCustomer;
+    protected $adminCustomer;
 
     /**
      * @var Entities\GroupTypes
      * @manyToOne(targetEntity="GroupTypes", inversedBy="groups")
      * @JoinColumn(name="group_type_id", referencedColumnName="id")
      */
-    private $groupType;
+    protected $groupType;
 
     /**
      * @OneToMany(targetEntity="Customers", mappedBy="group")
     */
-    private  $customers;
+    protected  $customers;
 
     /**
      * Get id

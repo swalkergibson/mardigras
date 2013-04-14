@@ -20,7 +20,6 @@ class Slim extends \Slim\Slim
 	}
 
 	/* Response methods */
-
 	public function responseJSON($array)
 	{
 		$res = $this->response();

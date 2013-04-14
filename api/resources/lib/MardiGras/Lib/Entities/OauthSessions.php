@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="oauth_sessions")
  * @Entity
  */
-class OauthSessions
+class OauthSessions extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,89 +19,89 @@ class OauthSessions
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="client_id", type="string", length=40, nullable=false)
      */
-    private $clientId;
+    protected $clientId;
 
     /**
      * @var string
      *
      * @Column(name="redirect_uri", type="string", length=250, nullable=true)
      */
-    private $redirectUri;
+    protected $redirectUri;
 
     /**
      * @var string
      *
      * @Column(name="owner_type", type="string", length=10, nullable=false)
      */
-    private $ownerType;
+    protected $ownerType;
 
     /**
      * @var string
      *
      * @Column(name="owner_id", type="string", length=255, nullable=true)
      */
-    private $ownerId;
+    protected $ownerId;
 
     /**
      * @var string
      *
      * @Column(name="access_token", type="string", length=40, nullable=true)
      */
-    private $accessToken;
+    protected $accessToken;
 
     /**
      * @var string
      *
      * @Column(name="auth_code", type="string", length=40, nullable=true)
      */
-    private $authCode;
+    protected $authCode;
 
     /**
      * @var string
      *
      * @Column(name="refresh_token", type="string", length=40, nullable=true)
      */
-    private $refreshToken;
+    protected $refreshToken;
 
     /**
      * @var integer
      *
      * @Column(name="access_token_expires", type="integer", nullable=true)
      */
-    private $accessTokenExpires;
+    protected $accessTokenExpires;
 
     /**
      * @var string
      *
      * @Column(name="stage", type="string", length=15, nullable=false)
      */
-    private $stage;
+    protected $stage;
 
     /**
      * @var integer
      *
      * @Column(name="first_requested", type="integer", nullable=false)
      */
-    private $firstRequested;
+    protected $firstRequested;
 
     /**
      * @var integer
      *
      * @Column(name="last_updated", type="integer", nullable=false)
      */
-    private $lastUpdated;
+    protected $lastUpdated;
 
     /**
      * @OneToMany(targetEntity="OauthSessionScopes", mappedBy="session")
     */
-    private  $sessionScopes;
+    protected  $sessionScopes;
 
     /**
      * Get id

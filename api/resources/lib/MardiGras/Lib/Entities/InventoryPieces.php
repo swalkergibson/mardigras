@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="inventory_pieces")
  * @Entity
  */
-class InventoryPieces
+class InventoryPieces extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,27 +19,33 @@ class InventoryPieces
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @Column(name="name", type="string", length=300, nullable=false)
+     * @Column(name="title", type="string", length=300, nullable=false)
      */
-    private $name;
+    protected $title;
 
+    /**
+     * @var integer
+     *
+     * @Column(name="disabled", type="integer", nullable=false)
+     */
+    protected $disabled;
 
     /**
      * @var Entities\Inventory
      * @manyToOne(targetEntity="Inventory", inversedBy="inventoryPieces")
      * @JoinColumn(name="inventory_id", referencedColumnName="id")
      */
-    private $inventory;
+    protected $inventory;
 
     /**
      * @OneToMany(targetEntity="InvoiceItemsPieces", mappedBy="inventoryPiece")
     */
-    private  $invoiceItemsPieces;
+    protected  $invoiceItemsPieces;
 
     /**
      * Get id
@@ -52,26 +58,49 @@ class InventoryPieces
     }
 
     /**
-     * Set name
+     * Set title
      *
-     * @param string $name
+     * @param string $title
      * @return InventoryPieces
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
     
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
      * @return string 
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
+    }
+
+    /**
+     * Set disabled
+     *
+     * @param integer $disabled
+     * @return InventoryPieces
+     */
+    public function setDisabled($disabled)
+    {
+        $this->disabled = $disabled;
+    
+        return $this;
+    }
+
+    /**
+     * Get disabled
+     *
+     * @return integer 
+     */
+    public function getDisabled()
+    {
+        return $this->disabled;
     }
 
     /**

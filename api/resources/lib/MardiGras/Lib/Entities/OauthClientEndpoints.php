@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="oauth_client_endpoints")
  * @Entity
  */
-class OauthClientEndpoints
+class OauthClientEndpoints extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,21 +19,21 @@ class OauthClientEndpoints
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="redirect_uri", type="string", length=255, nullable=true)
      */
-    private $redirectUri;
+    protected $redirectUri;
 
     /**
      * @var Entities\OauthClients
      * @manyToOne(targetEntity="OauthClients", inversedBy="clientEndpoints")
      * @JoinColumn(name="client_id", referencedColumnName="id")
      */
-    private $client;
+    protected $client;
 
 
     /**

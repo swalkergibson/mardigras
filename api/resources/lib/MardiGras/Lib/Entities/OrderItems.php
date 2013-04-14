@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="order_items")
  * @Entity
  */
-class OrderItems
+class OrderItems extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,49 +19,49 @@ class OrderItems
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @Column(name="quantity_ordered", type="integer", nullable=false)
      */
-    private $quantityOrdered;
+    protected $quantityOrdered;
 
     /**
      * @var integer
      *
      * @Column(name="quantity_received", type="integer", nullable=true)
      */
-    private $quantityReceived;
+    protected $quantityReceived;
 
     /**
      * @var float
      *
      * @Column(name="current_cost", type="decimal", nullable=false)
      */
-    private $currentCost;
+    protected $currentCost;
 
     /**
      * @var float
      *
      * @Column(name="price", type="decimal", nullable=false)
      */
-    private $price;
+    protected $price;
 
     /**
      * @var Entities\Orders
      * @manyToOne(targetEntity="Orders", inversedBy="orderItems")
      * @JoinColumn(name="order_id", referencedColumnName="id")
      */
-    private $order;
+    protected $order;
 
     /**
      * @var Entities\Inventory
      * @manyToOne(targetEntity="Inventory", inversedBy="orderItems")
      * @JoinColumn(name="inventory_id", referencedColumnName="id")
      */
-    private $inventory;
+    protected $inventory;
 
 
     /**

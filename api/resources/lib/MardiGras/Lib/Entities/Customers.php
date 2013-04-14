@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="customers")
  * @Entity
  */
-class Customers
+class Customers extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,157 +19,157 @@ class Customers
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="first_name", type="string", length=20, nullable=true)
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @var string
      *
      * @Column(name="last_name", type="string", length=30, nullable=true)
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @var string
      *
      * @Column(name="address1", type="string", length=45, nullable=true)
      */
-    private $address1;
+    protected $address1;
 
     /**
      * @var string
      *
      * @Column(name="address2", type="string", length=45, nullable=true)
      */
-    private $address2;
+    protected $address2;
 
     /**
      * @var string
      *
      * @Column(name="city", type="string", length=50, nullable=true)
      */
-    private $city;
+    protected $city;
 
     /**
      * @var string
      *
      * @Column(name="state", type="string", length=20, nullable=true)
      */
-    private $state;
+    protected $state;
 
     /**
      * @var string
      *
      * @Column(name="zip", type="string", length=10, nullable=true)
      */
-    private $zip;
+    protected $zip;
 
     /**
      * @var string
      *
      * @Column(name="phone", type="string", length=12, nullable=true)
      */
-    private $phone;
+    protected $phone;
 
     /**
      * @var string
      *
      * @Column(name="fax", type="string", length=12, nullable=true)
      */
-    private $fax;
+    protected $fax;
 
     /**
      * @var string
      *
      * @Column(name="email", type="string", length=60, nullable=true)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      *
      * @Column(name="notes", type="blob", nullable=true)
      */
-    private $notes;
+    protected $notes;
 
     /**
      * @var string
      *
      * @Column(name="company", type="string", length=250, nullable=true)
      */
-    private $company;
+    protected $company;
 
     /**
      * @var string
      *
      * @Column(name="credit_card", type="string", length=20, nullable=true)
      */
-    private $creditCard;
+    protected $creditCard;
 
     /**
      * @var \DateTime
      *
      * @Column(name="credit_card_exp", type="datetime", nullable=true)
      */
-    private $creditCardExp;
+    protected $creditCardExp;
 
     /**
      * @var string
      *
      * @Column(name="cvv", type="string", length=11, nullable=true)
      */
-    private $cvv;
+    protected $cvv;
 
     /**
      * @var integer
      *
      * @Column(name="default_tax_exempt", type="integer", nullable=false)
      */
-    private $defaultTaxExempt;
+    protected $defaultTaxExempt;
 
     /**
      * @var \DateTime
      *
      * @Column(name="created_date", type="datetime", nullable=true)
      */
-    private $createdDate;
+    protected $createdDate;
 
     /**
      * @var \DateTime
      *
      * @Column(name="last_activity_date", type="datetime", nullable=true)
      */
-    private $lastActivityDate;
+    protected $lastActivityDate;
 
     /**
      * @var \DateTime
      *
      * @Column(name="last_update_date", type="datetime", nullable=true)
      */
-    private $lastUpdateDate;
+    protected $lastUpdateDate;
 
     /**
      * @var Entities\Groups
      * @manyToOne(targetEntity="Groups", inversedBy="customers")
      * @JoinColumn(name="group_id", referencedColumnName="id")
      */
-    private $group;
+    protected $group;
 
     /**
      * @OneToMany(targetEntity="Invoices", mappedBy="customer")
     */
-    private  $invoices;
+    protected  $invoices;
 
     /**
      * @OneToMany(targetEntity="Groups", mappedBy="adminCustomer")
     */
-    private  $adminGroups;
+    protected  $adminGroups;
 
     /**
      * Get id

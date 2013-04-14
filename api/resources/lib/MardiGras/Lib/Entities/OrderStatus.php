@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="order_status")
  * @Entity
  */
-class OrderStatus
+class OrderStatus extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,26 +19,33 @@ class OrderStatus
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="title", type="string", length=50, nullable=false)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var integer
      *
      * @Column(name="complete", type="integer", nullable=false)
      */
-    private $complete;
+    protected $complete;
+
+    /**
+     * @var integer
+     *
+     * @Column(name="disabled", type="integer", nullable=false)
+     */
+    protected $disabled;
 
     /**
      * @OneToMany(targetEntity="Orders", mappedBy="orderStatus")
     */
-    private  $orders;
+    protected  $orders;
 
     /**
      * Get id
@@ -94,6 +101,29 @@ class OrderStatus
     public function getComplete()
     {
         return $this->complete;
+    }
+
+    /**
+     * Set disabled
+     *
+     * @param integer $disabled
+     * @return OrderStatus
+     */
+    public function setDisabled($disabled)
+    {
+        $this->disabled = $disabled;
+    
+        return $this;
+    }
+
+    /**
+     * Get disabled
+     *
+     * @return integer 
+     */
+    public function getDisabled()
+    {
+        return $this->disabled;
     }
 
     /**

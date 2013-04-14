@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="clerk_group_permissions")
  * @Entity
  */
-class ClerkGroupPermissions
+class ClerkGroupPermissions extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,26 +19,26 @@ class ClerkGroupPermissions
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="slug", type="string", length=45, nullable=true)
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @var string
      *
-     * @Column(name="name", type="string", length=200, nullable=true)
+     * @Column(name="title", type="string", length=200, nullable=true)
      */
-    private $name;
+    protected $title;
 
     /**
-     * @OneToMany(targetEntity="ClerkGroupPermissionsAssign", mappedBy="permissionAssignment")
+     * @OneToMany(targetEntity="ClerkGroupPermissionsAssign", mappedBy="clerkGroupPermission")
     */
-    private  $permissionAssignments;
+    protected $permissionAssignments;
 
     /**
      * Get id
@@ -74,26 +74,26 @@ class ClerkGroupPermissions
     }
 
     /**
-     * Set name
+     * Set title
      *
-     * @param string $name
+     * @param string $title
      * @return ClerkGroupPermissions
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
     
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
      * @return string 
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**

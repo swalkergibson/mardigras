@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="inventory")
  * @Entity
  */
-class Inventory
+class Inventory extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,108 +19,108 @@ class Inventory
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="sku", type="string", length=16, nullable=true)
      */
-    private $sku;
+    protected $sku;
 
     /**
      * @var string
      *
      * @Column(name="description", type="string", length=500, nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string
      *
      * @Column(name="short_description", type="string", length=200, nullable=true)
      */
-    private $shortDescription;
+    protected $shortDescription;
 
     /**
      * @var integer
      *
      * @Column(name="quantity", type="integer", nullable=false)
      */
-    private $quantity;
+    protected $quantity;
 
     /**
      * @var float
      *
      * @Column(name="last_cost", type="decimal", nullable=true)
      */
-    private $lastCost;
+    protected $lastCost;
 
     /**
      * @var float
      *
      * @Column(name="price", type="decimal", nullable=false)
      */
-    private $price;
+    protected $price;
 
     /**
      * @var string
      *
      * @Column(name="vendor_stock", type="string", length=50, nullable=true)
      */
-    private $vendorStock;
+    protected $vendorStock;
 
     /**
      * @var integer
      *
      * @Column(name="size_id", type="integer", nullable=true)
      */
-    private $sizeId;
+    protected $sizeId;
 
     /**
      * @var integer
      *
      * @Column(name="min_quantity", type="integer", nullable=true)
      */
-    private $minQuantity;
+    protected $minQuantity;
 
     /**
      * @var integer
      *
      * @Column(name="do_not_order", type="integer", nullable=true)
      */
-    private $doNotOrder;
+    protected $doNotOrder;
 
     /**
      * @var integer
      *
      * @Column(name="online", type="integer", nullable=true)
      */
-    private $online;
+    protected $online;
 
     /**
      * @var Entities\Vendors
      * @manyToOne(targetEntity="Vendors", inversedBy="inventoryItems")
      * @JoinColumn(name="vendor_id", referencedColumnName="id")
      */
-    private $vendor;
+    protected $vendor;
 
     /**
      * @var Entities\Category
      * @manyToOne(targetEntity="Category", inversedBy="inventoryItems")
      * @JoinColumn(name="category_id", referencedColumnName="id")
      */
-    private $category;
+    protected $category;
 
     /**
      * @OneToMany(targetEntity="OrderItems", mappedBy="inventory")
     */
-    private  $orderItems;
+    protected  $orderItems;
 
     /**
      * @OneToMany(targetEntity="InventoryPieces", mappedBy="inventory")
     */
-    private  $inventoryPieces;
+    protected  $inventoryPieces;
 
     /**
      * Get id

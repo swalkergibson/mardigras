@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="invoice_status")
  * @Entity
  */
-class InvoiceStatus
+class InvoiceStatus extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,26 +19,26 @@ class InvoiceStatus
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="title", type="string", length=45, nullable=false)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var integer
      *
      * @Column(name="closed", type="integer", nullable=false)
      */
-    private $closed;
+    protected $closed;
 
     /**
      * @OneToMany(targetEntity="Invoices", mappedBy="invoiceStatus")
     */
-    private  $invoices;
+    protected  $invoices;
 
     /**
      * Get id

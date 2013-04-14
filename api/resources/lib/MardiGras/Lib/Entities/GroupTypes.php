@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="group_types")
  * @Entity
  */
-class GroupTypes
+class GroupTypes extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,19 +19,26 @@ class GroupTypes
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @Column(name="name", type="string", length=150, nullable=false)
+     * @Column(name="title", type="string", length=150, nullable=false)
      */
-    private $name;
+    protected $title;
+
+    /**
+     * @var integer
+     *
+     * @Column(name="disabled", type="integer", nullable=false)
+     */
+    protected $disabled;
 
     /**
      * @OneToMany(targetEntity="Groups", mappedBy="groupType")
     */
-    private  $groups;
+    protected  $groups;
 
     /**
      * Get id
@@ -44,26 +51,49 @@ class GroupTypes
     }
 
     /**
-     * Set name
+     * Set title
      *
-     * @param string $name
+     * @param string $title
      * @return GroupTypes
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
     
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
      * @return string 
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
+    }
+
+    /**
+     * Set disabled
+     *
+     * @param integer $disabled
+     * @return GroupTypes
+     */
+    public function setDisabled($disabled)
+    {
+        $this->disabled = $disabled;
+    
+        return $this;
+    }
+
+    /**
+     * Get disabled
+     *
+     * @return integer 
+     */
+    public function getDisabled()
+    {
+        return $this->disabled;
     }
 
     /**
@@ -75,7 +105,7 @@ class GroupTypes
     public function setGroups(Groups $groups)
     {
         $this->groups = $groups;
-    
+
         return $this;
     }
 

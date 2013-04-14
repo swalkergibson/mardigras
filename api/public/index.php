@@ -14,9 +14,6 @@ Namespace MardiGras;
     // Include all route scripts
     require RESOURCES_PATH . '/lib/MardiGras/routes/include.php';
 
-
-
-
     // Run SLIM
     $app->run();
 ?>

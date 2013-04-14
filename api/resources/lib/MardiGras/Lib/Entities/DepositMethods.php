@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Table(name="deposit_methods")
  * @Entity
  */
-class DepositMethods
+class DepositMethods extends \MardiGras\Lib\MyDoctrineEntity
 {
     /**
      * @var integer
@@ -19,19 +19,26 @@ class DepositMethods
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @Column(name="title", type="string", length=45, nullable=false)
      */
-    private $title;
+    protected $title;
 
     /**
      * @OneToMany(targetEntity="Invoices", mappedBy="depositMethod")
     */
-    private  $invoices;
+    protected  $invoices;
+
+    /**
+     * @var integer
+     *
+     * @Column(name="disabled", type="integer", nullable=false)
+     */
+    protected $disabled;
 
     /**
      * Get id
@@ -64,6 +71,29 @@ class DepositMethods
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set disabled
+     *
+     * @param integer $disabled
+     * @return DepositMethods
+     */
+    public function setDisabled($disabled)
+    {
+        $this->disabled = $disabled;
+    
+        return $this;
+    }
+
+    /**
+     * Get disabled
+     *
+     * @return integer 
+     */
+    public function getDisabled()
+    {
+        return $this->disabled;
     }
 
     /**

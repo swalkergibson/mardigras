@@ -1,7 +1,7 @@
 <?php
-Namespace MardiGras\Controllers;
+Namespace MardiGras\Controllers\GroupTypes;
 
-class ClerkGroups extends \MardiGras\Lib\MGControllerClass
+class GroupTypes extends \MardiGras\Lib\MGControllerClass
 {
 	public function index()
 	{

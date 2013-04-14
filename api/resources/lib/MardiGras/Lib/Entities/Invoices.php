@@ -19,89 +19,89 @@ class Invoices extends \MardiGras\Lib\MyDoctrineEntity
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \DateTime
      *
      * @Column(name="transaction_date", type="datetime", nullable=false)
      */
-    private $transactionDate;
+    protected $transactionDate;
 
     /**
      * @var float
      *
      * @Column(name="sale_total", type="decimal", nullable=false)
      */
-    private $saleTotal;
+    protected $saleTotal;
 
     /**
      * @var float
      *
      * @Column(name="tax", type="decimal", nullable=true)
      */
-    private $tax;
+    protected $tax;
 
     /**
      * @var string
      *
      * @Column(name="balance_due", type="string", length=45, nullable=false)
      */
-    private $balanceDue;
+    protected $balanceDue;
 
     /**
      * @var float
      *
      * @Column(name="rent_dep", type="decimal", nullable=true)
      */
-    private $rentDep;
+    protected $rentDep;
 
     /**
      * @var string
      *
      * @Column(name="deposit_card", type="string", length=40, nullable=true)
      */
-    private $depositCard;
+    protected $depositCard;
 
     /**
      * @var \DateTime
      *
      * @Column(name="deposit_card_exp", type="datetime", nullable=true)
      */
-    private $depositCardExp;
+    protected $depositCardExp;
 
     /**
      * @var Entities\Clerks
      * @manyToOne(targetEntity="Clerks", inversedBy="invoices")
      * @JoinColumn(name="clerk_id", referencedColumnName="id")
      */
-    private $clerk;
+    protected $clerk;
 
     /**
      * @var Entities\InvoiceStatus
      * @manyToOne(targetEntity="InvoiceStatus", inversedBy="invoices")
      * @JoinColumn(name="invoice_status_id", referencedColumnName="id")
      */
-    private $invoiceStatus;
+    protected $invoiceStatus;
 
     /**
      * @var Entities\DepositMethods
      * @manyToOne(targetEntity="DepositMethods", inversedBy="invoices")
      * @JoinColumn(name="deposit_method_id", referencedColumnName="id")
      */
-    private $depositMethod;
+    protected $depositMethod;
 
     /**
      * @var Entities\Customers
      * @manyToOne(targetEntity="Customers", inversedBy="invoices")
      * @JoinColumn(name="customer_id", referencedColumnName="id")
      */
-    private $customer;
+    protected $customer;
 
     /**
      * @OneToMany(targetEntity="InvoiceItems", mappedBy="invoice")
     */
-    private  $invoiceItems;
+    protected  $invoiceItems;
 
     /**
      * Get id
